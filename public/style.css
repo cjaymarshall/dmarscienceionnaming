@@ -1,0 +1,972 @@
+/* Main Styles*/
+
+body.ltgrn 	{
+	background-color: #ccddcc;
+}
+
+div.caption{
+	clear:both;
+	font-family: "Comic Sans Serif";
+	color:#000000;
+	font-size: 12pt;
+	font-weight:800;
+	font-style:italic;
+}
+
+span.smallital {
+	font-family: "Times New Roman";
+	font-size: 13px;
+	font-weight: 600;
+	color: black;
+	font-style:italic;
+}
+
+nav.nav {font-family: "Helvetica";
+	color: #000000;
+	font-size: 9pt;
+	font-weight: 600;}
+
+
+div.modal {
+
+	display:none;
+	position:fixed;
+	z-index:4;
+	left:20%;
+	top:20%;
+	width:40%;
+	height:45%;
+	background-color:black;
+
+}	
+
+div.modal-content {
+
+	/*position:fixed;
+	left:-40%;
+	top:-40%;*/
+	z-index:4;
+	background-color: #fefefe;
+    margin: 2% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    height:75%;
+}
+div.modal-header {
+    padding: 2px 16px;
+    background-color: #ccddcc;
+    color: black;
+}
+
+/*link styles*/
+a:link{
+	color:blue;
+}
+a:visited{
+	color:blue;
+}
+a:hover{
+	color:green;
+}
+a:active{
+	color:red;
+}
+
+/*button hovers*/
+
+.button {
+    -webkit-transition-duration: 0.2s; /* Safari */
+    transition-duration: 0.2s;
+}
+
+.button:hover {
+    background-color: lightgray; /* Green */
+    color: black;
+}
+
+#dialog {
+	background: #ccbbaa url(../../images/dmarlogo.png) bottom left; 
+}
+
+
+/*header styles*/
+
+header.a {
+	height: 200px;
+	background-color:#ccddcc;
+	}
+h1.headera {
+	height:180px;
+	background: #ccbbaa url(../images/dmarlogo.png) no-repeat top left; 
+	text-indent:-33333px; 
+}
+h2.headera {
+	position:absolute;
+	top:20px;
+	left:350px;
+	font-family:Comic Sans MS;
+	color:#800000;
+	font-size:20pt;
+	font-weight:600;
+	font-style:italic;
+	margin:15px
+}
+
+header.b {
+	height: 100px;
+	background-color:#ccddcc;
+	
+	}
+h1.headerb {
+	height:80px;
+	background: #ccbbaa url(../images/dmarlogomid.png) no-repeat top left; 
+	text-indent:-33333px; 
+
+}
+h2.headerb {
+	position:absolute;
+	top:15px;
+	left:200px;
+	font-family:Comic Sans MS;
+	color:#800000;
+	font-size:14pt;
+	font-weight:600;
+	font-style:italic;
+	margin:15px
+	z-index:2;
+}
+address.header	{
+	position:absolute;
+	top:25px;
+	right:100px;
+	font-family: "Times New Roman", Times, serif;
+	font-size: 12px;
+	font-weight: 600;
+	z-index:1;
+
+}
+div.header {
+	position:fixed;
+	background-color:#ccddcc;
+	z-index:1;
+}
+
+
+
+
+
+/* "gen1" pages */
+
+#physicsgen1img {
+	width:200px;
+	height:300px;
+	float:left;margin:1.5%
+}
+
+#anatphysgen1img {
+	width:300px;
+	height:225px;
+	float:left;margin:1.5%
+}
+
+#apchemistrygen1img {
+	width:275px;
+	height:250px;
+	float:left;margin:1.5%
+}
+
+#apphysics1gen1img {
+	width:285px;
+	height:225px;
+	float:left;margin:1.5%
+}
+
+#apphysics2gen1img {
+	width:285px;
+	height:225px;
+	float:left;margin:1.5%
+}
+
+div.gen1 {
+
+	float:right;
+	width:60%;
+}
+
+p.gen1a {
+	float:left; 
+	width:70%;
+	text-align:center;
+	font-family:Comic Sans MS;
+	color:#800000;
+	font-size:28pt;
+	font-variant:small-caps;
+	font-weight: 800;
+	font-style: italic;
+	border: outset #666666 5px;
+	background-color: #999999;
+	margin:1.5%
+
+}
+
+p.gen1b {
+	float:left;
+	width:70%;
+	text-align:center;
+	font-family:Comic Sans MS;
+	color:#800000;
+	font-size:22pt;
+	font-variant:small-caps;
+	font-weight: 800;
+	font-style: italic;	
+	background-color: #FFCC99;
+	margin:1.5%
+}
+
+p.gen1c {
+	float:left;
+	width:70%;
+	text-align:center;
+	font-family:Comic Sans MS;
+	color:#800000;
+	font-size:22pt;
+	font-variant:small-caps;
+	font-weight: 800;
+	font-style: italic;	
+	background-color: #FFCCFF;
+	margin:1.5%
+}
+
+/*course pages*/
+
+section.course1a {
+	float:left;
+	width:45%;
+	margin:1.5%;
+	font-family: "Times New Roman", Times, serif;
+	font-size: 14px;
+	font-weight: 600;
+	text-align: justify;
+}
+
+section.course1b {
+	font-family:Comic Sans MS;
+	color: #800000;
+	font-size: 36pt;
+	font-variant: small-caps;
+	font-weight: 600;
+	font-style: italic;
+	text-align: center;
+	border: outset #666666 5px;
+	padding-left: 20px;
+	background-color: #999999;
+	float:right;
+	width:45%;
+	margin:1.5%;
+}
+
+section.course1c {
+	clear:both;
+
+}
+
+section.links1a {
+font-family:Comic Sans MS;
+	color: #800000;
+	font-size: 36pt;
+	font-variant: small-caps;
+	font-weight: 600;
+	font-style: italic;
+	text-align: center;
+	border: outset #666666 5px;
+	padding-left: 20px;
+	background-color: #999999;
+	width:90%;
+	margin:1.5%;
+}
+
+#physicscourse1divb {
+	position:absolute;
+	top:320px;
+	left:200px;
+}
+
+#anatphyscourse1divb {
+	position:absolute;
+	top:360px;
+	left:200px;
+}
+
+#anatphyslinks1divb {
+	position:absolute;
+	top:360px;
+	left:200px;
+}
+
+#apchemistrycourse1divb {
+	position:absolute;
+	top:360px;
+	left:200px;
+}
+
+#apphysics1course1divb {
+	position:absolute;
+	top:360px;
+	left:200px;
+}
+
+#apphysics2course1divb {
+	position:absolute;
+	top:360px;
+	left:200px;
+}
+
+a.course1a {
+	font-family: Comic Sans MS;
+	font-size: 16pt;
+	font-variant: small-caps;
+	font-weight: 600;
+	font-style: italic;
+}
+
+a.course1b {
+	font-family: "Comic Sans MS";
+	font-size: 16pt;
+	font-variant: small-caps;
+	font-weight: 600;
+	font-style: italic;
+	background-color: #FFCC99;
+	padding:5px 10px;
+}
+
+a.course1c {
+	font-family: "Comic Sans MS";
+	font-size: 16pt;
+	font-variant: small-caps;
+	font-weight: 600;
+	font-style: italic;
+	background-color: #FFCCFF;
+	padding:5px 10px;
+}
+
+a.course1d {
+	font-family: "Comic Sans MS";
+	font-size: 16pt;
+	font-variant: small-caps;
+	font-weight: 600;
+	font-style: italic;
+	background-color: #FFAFBE;
+	padding:5px 10px;
+}
+
+a.course1e {
+	font-family: "Comic Sans MS";
+	font-size: 16pt;
+	font-variant: small-caps;
+	font-weight: 600;
+	font-style: italic;
+	background-color: #CEFFB6;
+	padding:5px 10px;
+}
+
+/*subcourse pages*/
+
+header.physicsorient1 { 
+	background-image: url("../physics/physicsimg/bigpicturediagram.jpg");
+	background-repeat: no-repeat;
+	background-position: top left;
+	background-size: 280px 240px;
+	position:fixed;
+	background-color:#ccddcc;
+	z-index:2;
+}
+
+header.physicsmiod1 { 
+	background-image: url("../physics/physicsimg/bigpicturediagrama.png");
+	background-repeat: no-repeat;
+	background-position: top left;
+	background-size: 280px 240px;
+	position:fixed;
+	background-color:#ccddcc;
+	z-index:2;
+}
+
+header.anatphysorient1  { 
+	background-image: url("../anatphys/anatphysimg/axe.jpg");
+	background-repeat: no-repeat;
+	background-position: top left;
+	background-size: 280px 240px;
+	position:fixed;
+	background-color:#ccddcc;
+	z-index:2;
+}
+header.anatphyschem1  { 
+	background-image: url("../anatphys/anatphysimg/axechem.png");
+	background-repeat: no-repeat;
+	background-position: top left;
+	background-size: 280px 230px;
+	position:fixed;
+	background-color:#ccddcc;
+	z-index:2;
+}
+
+header.anatphysmovement1  { 
+	background-image: url("../anatphys/anatphysimg/axemovement.png");
+	background-repeat: no-repeat;
+	background-position: top left;
+	background-size: 280px 230px;
+	position:fixed;
+	background-color:#ccddcc;
+	z-index:2;
+}
+
+header.apchemistryorient1 {
+	background-image: url("../apchemistry/apchemistryimg/emptyframework.jpg");
+	background-repeat: no-repeat;
+	background-position: top left;
+	background-size: 280px 240px;
+	position:fixed;
+	background-color:#ccddcc;
+	z-index:2;
+}
+
+header.apphysics1orient1 {
+	background-image: url("../apphysics1/apphysics1img/physics1emptyframework.jpg");
+	background-repeat: no-repeat;
+	background-position: top left;
+	background-size: 280px 320px;
+	position:fixed;
+	background-color:#ccddcc;
+	z-index:2;
+}
+
+header.apphysics2orient1 {
+	background-image: url("../apphysics2/apphysics2img/emrelthermo.jpg");
+	background-repeat: no-repeat;
+	background-position: top left;
+	background-size: 280px 340px;
+	position:fixed;
+	background-color:#ccddcc;
+	z-index:2;
+}
+
+
+h1.orient1, h1.miod1, h1.chem1 {
+	float:right;
+	width:50%;
+	margin:1.5%;
+	font-family: "Comic Sans MS";
+	color: #800000;
+	font-size: 36pt;
+	font-variant: small-caps;
+	font-weight: 600;
+	font-style: italic;
+	text-align: center;
+	border: outset #666666 5px;
+	padding-left: 20px;
+	background-color: #999999;
+	margin:auto;
+}
+
+p.orient1, p.miod1, p.chem1 {
+	font-family: "Times New Roman", Times, serif;
+	font-size: 14px;
+	font-weight: 600;
+	text-align: justify;
+	padding-right: 40px;
+	float:right;
+	width:75%;
+}
+
+a.orient1, a.miod1, a.chem1 {
+	font-family: "Times New Roman", Times, serif;
+	font-size: 12px;
+	font-weight: 600;
+	text-align: left;
+	padding-top:10px;
+	float:right;
+	width:78%;
+}
+
+address.orient1, address.miod1, address.chem1 {
+	font-family: "Times New Roman", Times, serif;
+	font-size: 12px;
+	font-weight: 600;
+	float:right;
+	width:23%;
+	margin:1.5%;
+}
+
+div.orient1 {
+	position:absolute;
+	top:320px;
+	z-index:0;
+}
+
+#physicsorient1tablediv, #physicsmiod1tablea {
+	position:absolute;
+	top:320px;
+	width:80%;
+}
+
+#anatphysorient1tablediv, #anatphyschem1tablediv {
+	position:absolute;
+	top:320px;
+	width:80%;
+}
+
+#apchemistryorient1tablediv {
+	position:absolute;
+	top:330px;
+	width:80%;
+}
+
+#apphysics1orient1tablediv {
+	position:absolute;
+	top:380px;
+	width:80%;
+}
+
+#apphysics2orient1tablediv {
+	position:absolute;
+	top:410px;
+	width:80%;
+}
+
+th.orient1, th.miod1, th.chem1 {
+	font-family: "Comic Sans MS";
+	color: #800000;
+	font-size: 18pt;
+	font-variant: small-caps;
+	font-weight: 600;
+	font-style: italic;
+	text-align:left;
+}
+
+td.orient1a, td.miod1a, td.chem1a {
+font-family: "Comic Sans MS";
+	font-size: 14pt;
+	font-variant: small-caps;
+	font-weight: 600;
+	font-style: italic;
+	background-color: #FFCC99;
+	padding:5px;
+	padding-left:20px;
+}
+
+td.orient1b, td.miod1b, td.chem1b {
+font-family: "Comic Sans MS";
+	font-size: 14pt;
+	font-variant: small-caps;
+	font-weight: 600;
+	font-style: italic;
+	background-color: #FFCCFF;
+	padding:5px;
+	padding-left:20px;
+}
+
+td.orient1c, td.miod1c, td.chem1c {
+font-family: "Comic Sans MS";
+	font-size: 14pt;
+	font-variant: small-caps;
+	font-weight: 600;
+	font-style: italic;
+	background-color: #FFAFBE;
+	padding:5px;
+	padding-left:20px;
+}
+
+td.orient1d, td.miod1d, td.chem1d {
+font-family: "Comic Sans MS";
+	font-size: 14pt;
+	font-variant: small-caps;
+	font-weight: 600;
+	font-style: italic;
+	background-color: #CEFFB6;
+	padding:5px;
+	padding-left:20px;
+}
+
+/*frame pages*/
+
+header.framepage{
+}
+
+nav.framepage {
+	background-color:#ccddcc;f
+	float:left;
+	width:65%;margin:1.5%
+}
+
+address.framepagesmall {
+
+	font-family: "Times New Roman", Times, serif;
+	font-size: 10px;
+	font-weight: 600;
+	position:absolute;
+	top:15px;
+	right:200px;
+}
+
+a.framepagesmall	{
+	font-family: "Times New Roman", Times, serif;
+	font-size: 10px;
+	font-weight: 600;
+	text-align: justify;
+	padding: 5px;
+}
+
+a.framepageasmall	{
+	font-family: "Times New Roman", Times, serif;
+	font-size: 9px;
+	font-weight: 600;
+	text-align: justify;
+	padding: 3px;
+	background-color: #FFCC99;
+}
+a.framepagebsmall	{
+	font-family: "Times New Roman", Times, serif;
+	font-size: 9px;
+	font-weight: 600;
+	text-align: justify;
+	padding: 5px;
+	background-color: #FFCCFF;
+}
+a.framepagecsmall	{
+	font-family: "Times New Roman", Times, serif;
+	font-size: 9px;
+	font-weight: 600;
+	text-align: justify;
+	padding: 5px;
+	background-color: #FFAFBE;
+}
+
+a.framepagedsmall	{
+	font-family: "Times New Roman", Times, serif;
+	font-size: 9px;
+	font-weight: 600;
+	text-align: justify;
+	padding: 5px;
+	background-color: #CEFFB6;
+}
+
+a.framepageesmall {
+	font-family: "Times New Roman", Times, serif;
+	font-size: 10px;
+	font-weight: 600;
+	text-align: justify;
+	padding: 5px;
+	background-color: #ffffff
+}
+
+
+/*frames*/
+
+a.biglink {
+	font-family: "Comic Sans MS";
+	font-size: 30pt;
+	font-variant: small-caps;
+	font-weight: 600;
+	font-style: italic;
+}
+
+h1.bigblack {
+	font-family: "Comic Sans MS";
+	color: #000000;
+	font-size: 30pt;
+	font-variant: small-caps;
+	font-weight: 600;
+	font-style: italic;
+}
+
+h1.bigmaroon {
+	font-family: "Comic Sans MS";
+	color: #800000;
+	font-size: 30pt;
+	font-variant: small-caps;
+	font-weight: 600;
+	font-style: italic;
+}
+h1.smallblack {
+	font-family: "Comic Sans MS";
+	color: #000000;
+	font-size: 18pt;
+	font-variant: small-caps;
+	font-weight: 600;
+	font-style: italic;
+}
+
+h1.smallmaroon {
+	font-family: "Comic Sans MS";
+	color: #800000;
+	font-size: 18pt;
+	font-variant: small-caps;
+	font-weight: 600;
+	font-style: italic;
+}
+
+h2.bigblack {
+	font-family: "Comic Sans MS";
+	color: #000000;
+	font-size: 26pt;
+	font-variant: small-caps;
+	font-weight: 600;
+	font-style: italic;
+
+ }
+h2.bigred {
+	font-family: "Comic Sans MS";
+	color: red;
+	font-size: 26pt;
+	font-variant: small-caps;
+	font-weight: 600;
+	font-style: italic;
+}
+
+h2.bigblackund {
+	font-family: "Comic Sans MS";
+	color: #000000;
+	font-size: 26pt;
+	font-variant: small-caps;
+	font-weight: 600;
+	font-style: italic;
+	text-decoration:underline;
+}
+
+p.subnotes {
+	font-family: "Helvetica";
+	color: #000000;
+	font-size: 8pt;
+	font-weight: 600;
+}
+
+h2.contentmaroonnormal {
+	font-family: "Comic Sans MS";
+	color: #800000;
+	font-size: 24pt;
+	font-variant: small-caps;
+	font-weight: 600;
+	font-style: italic;
+}
+
+p.contentmaroonnormal {
+	font-family: "Comic Sans MS";
+	color: #800000;
+	font-size: 24pt;
+	font-variant: small-caps;
+	font-weight: 600;
+	font-style: italic;
+}
+span.contentmaroonnormal {
+	font-family: "Comic Sans MS";
+	color: #800000;
+	font-size: 24pt;
+	font-variant: small-caps;
+	font-weight: 600;
+	font-style: italic;
+}
+
+div.contentmaroonnormal {
+	font-family: "Comic Sans MS";
+	color: #800000;
+	font-size: 24pt;
+	font-variant: small-caps;
+	font-weight: 600;
+	font-style: italic;
+}
+
+span.equation {
+	font-family: "Times New Roman";
+	color: #000000;
+	font-size: 28pt;
+	font-weight: 400;
+	font-style: italic;
+	font-variant:normal;
+}
+span.den {
+	font-size:50%;
+}
+span.num {
+	font-size:50%;
+	vertical-align:1.2ex;
+}
+span.den2 {
+	font-size:75%;
+}
+span.num2 {
+	font-size:75%;
+	vertical-align:1.2ex;
+}
+span.exp {
+	font-size:50%;
+	vertical-align:1.2ex;
+}
+span.sub {
+	font-size:65%;
+	vertical-align:-.8ex;
+}
+span.blackemund {
+	color:black;
+	text-decoration:underline;
+	font-weight:800;
+}
+span.blackem {
+	color:black;
+	font-weight:800;
+}
+span.normalblackemund {
+	color:black;
+	font-family: "Comic Sans MS";
+	font-size:24pt;
+	text-decoration:underline;
+	font-weight:800;
+	font-variant: small-caps;
+	font-style: italic;
+}
+span.blacktimemed {
+	font-family: "Times New Roman";
+	color:black;
+	font-size:75%;
+	font-weight:600;
+	font-style:normal;
+}
+span.blacktimebox {
+	font-family: "Times New Roman";
+	color:black;
+	font-size:28pt;
+	font-weight:600;
+	font-style:normal;
+	border: 3px solid black;
+	position:relative;
+	left:50px;
+}
+
+span.blackemmajor {
+	color:black;
+	font-weight:800;
+	font-size:150%;
+}
+span.red {
+	color:red;
+}
+span.redit{
+	color:red;
+	font-size: italic;
+}
+span.redline {
+	color:red;
+	text-decoration: underline;
+}
+span.spaceunderline {
+	white-space: pre;
+	text-decoration:underline;
+}
+span.space {
+	white-space: pre;
+}
+span.redspaceunderline {
+	text-decoration: underline;
+	color:red;
+}
+
+span.blue {
+	color:blue;
+}
+
+span.blueline {
+	color:blue;
+	text-decoration: underline;
+}
+
+span.smallblack {
+	font-family: "Comic Sans MS";
+	color: #000000;
+	font-size: 24pt;
+	font-variant: small-caps;
+	font-weight: 600;
+	font-style: italic;
+}
+
+span.smallerblack {
+	font-family: "Comic Sans MS";
+	color: #000000;
+	font-size: 18pt;
+	font-variant: small-caps;
+	font-weight: 600;
+	font-style: italic;
+}
+
+span.smallerblackarial {
+	font-family: "Arial";
+	color: #000000;
+	font-size: 18pt;
+	font-variant: small-caps;
+	font-weight: 600;
+	
+}
+
+span.smallblackarial {
+	font-family: "Arial";
+	color: #000000;
+	font-size: 24pt;
+	font-variant: small-caps;
+	font-weight: 600;
+	
+}
+
+span.smallblackarialnocap {
+	font-family: "Arial";
+	color: #000000;
+	font-size: 24pt;
+	font-weight: 600;
+	
+}
+
+span.smallmaroon {
+	font-family: "Comic Sans MS";
+	color: #800000;
+	font-size: 24pt;
+	font-variant: small-caps;
+	font-weight: 600;
+	font-style: italic;
+}
+.indent {
+
+	position:relative;
+	left:50px;
+}
+
+
+.indentb {
+
+	position:relative;
+	left:100px;
+}
+
+.indentc {
+
+	position:relative;
+	left:200px;
+}
+span.smallermaroon {
+	font-family: "Comic Sans MS";
+	color: #800000;
+	font-size: 18pt;
+	font-variant: small-caps;
+	font-weight: 600;
+	font-style: italic;
+}
+
+td.da	{
+	font-family: "Comic Sans MS";
+	font-size: 12pt;
+	font-variant: small-caps;
+	font-weight: 600;
+	font-style: italic;
+	background-color: #FFCC99;
+}
+
+
+
+

@@ -1,0 +1,168 @@
+<html>
+
+	<head>
+
+		<title>Ion Practice Results</title>
+
+		 <link rel="stylesheet" href="jquery-ui.min.css" type="text/css" />
+        <link rel="stylesheet" href="../../style/style.css" type="text/css" />
+         
+        <!-- Load jQuery first before jQuery UI! -->
+        <script src="../../myjsjq.js"></script>
+        <script src="jquery.js"></script>
+        <script src="jquery-ui.min.js"></script>
+        <script type="text/javascript">
+
+		var opener = window.opener
+		var name = opener.document.getElementById("inputYourName").value
+		var numCorrect = opener.numCorrectAnswers
+		var numQuestions = opener.questionNumbers.length
+		var isCorrect;
+		var ion;
+		var takerAns;
+		var correctAns;
+		var resultIon=[];
+		var resultTakerAns=[];
+		var resultCorrectAns=[];
+
+		$(document).ready(function() {
+
+		
+		$('#print').on('click',function() {
+
+			window.print();
+
+			return false;
+	
+
+		});
+		$('#close').on('click',function() {
+
+			window.close();
+			return false;
+
+
+		})
+
+		results();	
+
+		function results() {
+
+			$("#taker").append(name);
+			$("#correct").append(numCorrect);
+			$("#total").append(numQuestions);
+			
+
+			var table = document.getElementById("table")
+
+			for(i=0;i<numQuestions;i++) {
+
+				ion = opener.ionSymbols[i];
+				resultIon.push(ion);
+				takerAns = opener.userAnswers[i];
+				resultTakerAns.push(takerAns);
+				correctAns = opener.correctAnswers[i];
+				resultCorrectAns.push(correctAns);
+
+
+				if(takerAns==correctAns) {
+
+					var isCorrect = true;
+
+				} else {
+
+					isCorrect = false
+
+				}
+
+				//alert(isCorrect)
+
+				var newElema = document.createElement("tr");
+				var newElemb = document.createElement("td");
+				newElemb.setAttribute("style","width:200px;text-align:center;font-size:16pt");
+				var newTextb = document.createTextNode(ion);
+				newElemb.appendChild(newTextb);
+
+				var newElemc = document.createElement("td");
+
+				var newTextc = document.createTextNode(takerAns);
+				newElemc.appendChild(newTextc);
+				newElemc.setAttribute("style","width:200px;text-align:center;font-size:16pt");
+
+
+				
+				if (isCorrect == false) {
+
+				
+
+					newElemc.setAttribute("style","width:200px;text-align:center;background-color:lightgray;font-size:20pt");
+
+				}
+
+				
+				var newElemd = document.createElement("td");
+
+				var newTextd = document.createTextNode(correctAns);
+				newElemd.appendChild(newTextd);
+				newElemd.setAttribute("style","width:200px;text-align:center;font-size:16pt");
+
+				if (isCorrect == false) {
+
+					newElemd.setAttribute("style","width:200px;text-align:center;background-color:lightgray;font-size:20pt");
+
+				}
+				
+
+
+				table.appendChild(newElema);
+				table.appendChild(newElemb);
+				table.appendChild(newElemc);
+				table.appendChild(newElemd);
+			
+			}	
+
+				
+		}
+
+
+ 	});
+
+		</script>
+
+	</head>
+
+	<body>
+
+		<div>
+
+			<span class="smallerblackarial">
+
+			<span id="taker"></span>, you have come to the end of this quiz.</br></br>
+
+		
+
+			You have scored <span id="correct"></span> of <span id="total"></span> correct.</br></br>
+
+			Listed below are the ions, your answers, and the correct answers (Note-You cannot save these results, you can only print them):</br></br>
+
+			</span>
+
+			<table id="table">
+
+				<tr>
+					<th style="width:200px;font-size:16pt;">Ion</th>
+					<th style="width:200px;font-size:16pt;">Your Answer</th>
+					<th style="width:200px;font-size:16pt;">Correct Answer</th>
+				</tr>
+
+			</table></br>
+
+		<form>Would you like to:</br></br>
+
+			Close this window and return to the menu: <button id="close" style="width:80px">Close</button></br>
+   			Print a copy of these results and return to the application: <button id="print" style="width:80px">Print</button></br>
+   			(Note-this action will close the results window.)
+
+	</body>
+
+

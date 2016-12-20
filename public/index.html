@@ -1,0 +1,1221 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+       
+        <title>Ion-Naming Practice</title>
+        
+        <link rel="stylesheet" href="jquery-ui.min.css" type="text/css" />
+        <link rel="stylesheet" href="style.css" type="text/css" />
+       
+        <style>
+
+          .ltgrn {
+            background-color:#ccddcc;
+          }
+
+          header.header {
+            height: 100px;
+            background-color:#ccddcc;
+          }
+
+          h1.header {
+            height:80px;
+            background: #ccbbaa url(dmarlogomid.png) no-repeat top left; 
+            text-indent:-33333px; 
+          }
+
+          h2.header {
+          position:absolute;
+          top:15px;
+          left:300px;
+          font-family:Comic Sans MS;
+          color:#800000;
+          font-size:28pt;
+          font-weight:600;
+          font-style:italic;
+          margin:15px
+          }
+
+          address.header  {
+            position:absolute;
+            top:25px;
+            right:100px;
+            font-family: "Times New Roman", Times, serif;
+            font-size: 12px;
+            font-weight: 600;
+            z-index:1;
+          }
+
+          .smallerblackarial {
+            font-family: "Arial";
+            color: #000000;
+            font-size: 18pt;
+            font-variant: small-caps;
+            font-weight: 600;  
+          }
+
+          .smallermaroonarial {
+            font-family: "Arial";
+            color: #800000;
+            font-size: 18pt;
+            font-variant: small-caps;
+            font-weight: 600;
+            font-style: italic;
+          }
+
+          .marooncomic {
+            font-family: "Comic Sans MS";
+            color: #800000;
+            font-size: 24pt;
+            font-variant: small-caps;
+            font-weight: 600;
+          }
+
+          .indent {
+            position:relative;
+            left:100px;
+          }
+
+          .no-close .ui-dialog-titlebar-close {
+            display:none;
+          }
+
+          .button {
+             -webkit-transition-duration: 0.2s; /* Safari */
+             transition-duration: 0.2s;
+          }
+
+          .button:hover {
+            background-color: lightgray; /* Green */
+            color: black;
+          }
+
+          #dialog {
+            background: #ccbbaa url(dmarlogomidsmall.png) no-repeat bottom left; 
+            width:100px;
+            height:50px;
+          }
+          
+          #explanationText {
+            width:300px;
+            height:350px;
+            position:absolute;
+            top:90px;
+            right:50px;
+            background-color:#cccccc;
+            padding:5px;
+            overflow:auto;
+          }
+
+          #explanationTextTitle {
+            font-family: "Arial";
+            color: #000000;
+            font-size: 18pt;
+            font-variant: small-caps;
+            font-weight: 600;
+            position:absolute;
+            top:60px;
+            right:255px;
+            color:black;
+          }
+
+          #timerTitle {
+            font-family: "Arial";
+            color: #000000;
+            font-size: 18pt;
+            font-variant: small-caps;
+            font-weight: 600;
+            position:absolute;
+            top:150px;
+            right:600px;
+            color:black;
+          }
+
+          #timer {
+            width:200px;
+            height:100px;
+            position:absolute;
+            top:180px;
+            right:450px;
+            background-color:#ccbbaa;
+            padding:5px;
+            overflow:auto;
+          }
+
+        </style>
+
+        <script src="myjsjq.js"></script>
+        <script src="ionid.js"></script>
+        <script src="jquery.js"></script>
+        <script src="jquery-ui.min.js"></script>
+        <script>
+
+        var practiceName="";
+        var quizType;
+           var numQ="";
+           var answer;
+           var qNumber = 1;
+           var ans;
+           var ans1;
+           var ans2;
+           var ans3;
+           var ans4;
+           var ans5;
+           var i;
+           var useThisArray = [];
+           var questionNumbers = [];
+           var userAnswers = [];
+           var correctAnswers = [];
+           var correctAns;
+           var newWina;
+           var numCorrectAnswers;
+           var ionSymbol;
+           var ionSymbols = []
+           var explanationIndex;
+           var explanation;
+           var explanationActual;
+           var time=0;
+           var timeInterval
+
+           var ions = ["Bh","Fe","Fe","Ru","Ru","Ru","Ru","Ru","Ru","Ru","Os","Os","Os","Os","Os","Os","Os","Hs","Co","Co","Rh","Rh","Ir","Ir","Ni","Ni","Ni","Pd","Pd","Pt","Pt","Cu","Cu","Ag","Au","Au","Zn","Cd","Hg","Hg","Al","Ga","Ga","In","In","Tl","Tl","Ge","Ge","Sn","Sn","Pb","Pb","Bi","Bi","Po","Po","H","C","N","P","O","S","Se","F","Cl","Br","I","At","ClO","ClO\u2082","ClO\u2083","ClO\u2084","BrO","BrO\u2082","BrO\u2083","BrO\u2084","IO","IO\u2082","IO\u2083","IO\u2084","AtO","AtO\u2082","AtO\u2083","AtO\u2084","O\u2082","O\u2082","O\u2083","SO\u2082","SO\u2083","SO\u2084","S\u2082O\u2085","S\u2082O\u2087","S\u2082O\u2083","S\u2082O\u2084","HSO\u2082","HSO\u2083","HSO\u2084","SeO\u2082","SeO\u2083","SeO\u2084","Se\u2082O\u2085","Se\u2082O\u2087","HSeO\u2082","HSeO\u2083","HSeO\u2084","TeO\u2082","TeO\u2083","TeO\u2084","TeO\u2085","TeO\u2086","Te\u2082O\u2081\u2080","HTeO\u2083","HTeO\u2084","N\u2083","NH\u2084","NH\u2082","NO\u2082","NO\u2083","HPO\u2082","H\u2082PO\u2082","HPO\u2083","H\u2082PO\u2083","PO\u2084","HPO\u2084","H\u2082PO\u2084","P\u2082O\u2087","AsO\u2082","AsO\u2083","As\u2082O\u2085","HAsO\u2083","H\u2082AsO\u2083","AsO\u2084","HAsO\u2084","H\u2082AsO\u2084","As\u2082O\u2087","BiO\u2083","CO\u2083","HCO\u2083","HCO\u2082","C\u2082H\u2083O\u2082","C\u2082O\u2084","HC\u2082O\u2084","CN","SCN","OCN","CNO","SiO\u2084","SiO\u2083","Si\u2082O\u2087","GeO\u2084","GeO\u2083","SnO\u2084","SnO\u2083","SnO\u2082","PbO\u2082","HPbO\u2082","PbO\u2084","PbO\u2083","HPbO\u2084"]
+
+           var ionCharge = ["\u2077\u207A","\u00B2\u207A","\u00B3\u207A","\u00B2\u207A","\u00B3\u207A","\u2074\u207A","\u2075\u207A","\u2076\u207A","\u2077\u207A","\u2078\u207A","\u00B2\u207A","\u00B3\u207A","\u2074\u207A","\u2075\u207A","\u2076\u207A","\u2077\u207A","\u2078\u207A","\u2078\u207A","\u00B2\u207A","\u00B3\u207A","\u00B3\u207A","\u2074\u207A","\u00B3\u207A","\u2074\u207A","\u00B2\u207A","\u00B3\u207A","\u2074\u207A","\u00B2\u207A","\u2074\u207A","\u00B2\u207A","\u2074\u207A","\u207A","\u00B2\u207A","\u207A","\u207A","\u00B3\u207A","\u00B2\u207A","\u00B2\u207A","\u207A","\u00B2\u207A","\u00B3\u207A","\u207A","\u00B3\u207A","\u207A","\u00B3\u207A","\u207A","\u00B3\u207A","\u00B2\u207A","\u2074\u207A","\u00B2\u207A","\u2074\u207A","\u00B2\u207A","\u2074\u207A","\u00B3\u207A","\u2075\u207A","\u2074\u207A","\u2076\u207A","\u207B","\u2074\u207B","\u00B3\u207B","\u00B3\u207B","\u00B2\u207B","\u00B2\u207B","\u00B2\u207B","\u207B","\u207B","\u207B","\u207B","\u207B","\u207B","\u207B","\u207B","\u207B","\u207B","\u207B","\u207B","\u207B","\u207B","\u207B","\u207B","\u207B","\u207B","\u207B","\u207B","\u207B","\u00B2\u207B","\u207B","\u207B","\u00B2\u207B","\u00B2\u207B","\u00B2\u207B","\u00B2\u207B","\u00B2\u207B","\u00B2\u207B","\u00B2\u207B","\u207B","\u207B","\u207B","\u00B2\u207B","\u00B2\u207B","\u00B2\u207B","\u00B2\u207B","\u00B2\u207B","\u207B","\u207B","\u207B","\u00B2\u207B","\u00B2\u207B","\u00B2\u207B","\u2074\u207B","\u2076\u207B","\u2078\u207B","\u207B","\u207B","\u207B","\u207A","\u207B","\u207B","\u207B","\u00B2\u207B","\u207B","\u00B2\u207B","\u207B","\u00B3\u207B","\u00B2\u207B","\u207B","\u2074\u207B","\u207B","\u00B3\u207B","\u2074\u207B","\u00B2\u207B","\u207B","\u00B3\u207B","\u00B2\u207B","\u207B","\u2074\u207B","\u207B","\u00B2\u207B","\u207B","\u207B","\u207B","\u00B2\u207B","\u207B","\u207B","\u207B","\u207B","\u207B","\u2074\u207B","\u00B2\u207B","\u2076\u207B","\u2074\u207B","\u00B2\u207B","\u2074\u207B","\u00B2\u207B","\u00B2\u207B","\u00B2\u207B","\u207B","\u2074\u207B","\u00B2\u207B","\u00B3\u207B"]
+
+           var ionName = ["Bohrium(VII)","Iron((II)","Iron(III)","Ruthenium(II)","Ruthenium(III)","Ruthenium(IV)","Ruthenium(V)","Ruthenium(VI)","Ruthenium(VII)","Ruthenium(VIII)","Osmium(II)","Osmium(III)","Osmium(IV)","Osmium(V)","Osmium(VI)","Osmium(VII)","Osmium(VIII)","Hassium(VIII)","Cobalt(II)","Cobalt(III)","Rhodium(III)","Rhodium(IV)","Iridium(III)","Iridium(IV)","Nickel(II)","Nickel(III)","Nickel(IV)","Palladium((II)","Palladium(IV)","Platinum(II)","Platinum(IV)","Copper(I)","Copper(II)","Silver(I)","Gold(I)","Gold(III)","Zinc(II)","Cadmium(II)","Mercury(I)","Mercury(II)","Aluminum","Gallium(I)","Gallium(III)","Indium(I)","Indium(III)","Thallium(I)","Thallium(III)","Germanium(II)","Germanium(IV)","Tin(II)","Tin(IV)","Lead(II)","Lead(IV)","Bismuth(III)","Bismuth(V)","Polonium(IV)","Polonium(VI)","Hydride","Carbide","Nitride","Phosphide","Oxide","Sulfide","Selenide","Fluoride","Chloride","Bromide","Iodide","Astatide","Hypochlorite","Chlorite","Chlorate","Perchlorate","Hypobromite","Bromite","Bromate","Perbromate","Hypoiodite","Iodite","Iodate","Periodate","Hypoastatite","Astatite","Astatate","Perastatate","Peroxide","Superoxide","Ozonide","Hyposulfite","Sulfite","Sulfate","Disulfite","Disulfate","Thiosulfate","Dithionate","Hydrogen Hyposulfite","Hydrogen Sulfite","Hydrogen Sulfate","Hyposelenite","Selenite","Selenate","Diselenite","Diselenate","Hydrogen Hyposelenite","Hydrogen Selenite","Hydrogen Selenate","Hypotellurite","Tellurite","Metatellurate","Pentaoxytellurate","Orthotellurate","Ditellurate","Hydrogen Tellurite","Hydrogen Tellurate","Azide","Ammonium","Amide","Nitrite","Nitrate","Hydrogen Hypophosphite","Dihydrogen Hypophosphite","Hydrogen Phosphite","Dihydrogen Phosphite","Phosphate","Hydrogen Phosphate","Dihydrogen Phosphate","Pyrophosphate","Metaarsenite","Arsenite","Pyroarsenite","Hydrogen Arsenite","Dihydrogen Arsenite","Arsenate","Hydrogen Arsenate","Dihydrogen Arsenate","Diarsenate","Bismuthate","Carbonate","Hydrogen Carbonate","Formate","Acetate","Oxalate","Hydrogen Oxalate","Cyanide","Thiocyanate","Cyanate","Fulminate","(Ortho)silicate","Silicate","Pyrosilicate","Orthogermanate","Germanate","Orthostannate","Stannate","Stannite","Plumbite","Hydrogen Plumbite","Orthoplumbate","Plumbate","Hydrogen Plumbate"]
+
+            var ionNameX = ["Bohrium","Iron","Iron","Ruthenium","Ruthenium","Ruthenium","Ruthenium","Ruthenium","Ruthenium","Ruthenium","Osmium","Osmium","Osmium","Osmium","Osmium","Osmium","Osmium","Hassium","Cobalt","Cobalt","Rhodium","Rhodium","Iridium","Iridium","Nickel","Nickel","Nickel","Palladium","Palladium","Platinum","Platinum","Copper","Copper","Silver","Gold","Gold","Zinc","Cadmium","Mercury","Mercury","Aluminum(III)","Gallium","Gallium","Indium","Indium","Thallium","Thallium","Germanium","Germanium","Tin","Tin","Lead","Lead","Bismuth","Bismuth","Polonium","Polonium","Hydrogen","Carbon","Nitrogen","Phosphorus","Oxygen","Sulfur","Selenium","Fluorine","Chlorine","Bromine","Iodine","Astatine","Chlorine","Chlorine","Chlorine","Chlorine","Bromine","Bromine","Bromine","Bromine","Iodine","Iodine","Iodine","Iodine","Astatine","Astatine","Astatine","Astatine","Oxygen","Oxygen","Oxygen","Sulfite","Hyposulfite","Hyposulfite","Sulfite","Sulfite","Dithionate","Thionate","Hyposulfite", "Hydrogen Sulfate", "Hydrogen Sulfite","Selenite","Hyposelenite","Hyposelenite","Diselenate","Diselenite"]
+
+            var ionNameY = ["Bohride","Ferrate","Ferrate","Ruthenate","Ruthenate","Ruthenate","Ruthenate","Ruthenide","Ruthenide","Ruthenide","Osmiide","Osmiide","Osmiide","Osmiide","Osmiite","Osmiite","Osmiite","Hasside","Cobaltide","Cobaltite","Rhodate","Rhodite","Iridide","Iridite","Nickelide","Nickelide","Nickelite","Palladide","Palladite","Platinate","Platinite","Cupride","Cupride","Argentide","Auride","Auride","Zincide","Cadmide","Mercuride","Mercuride","Aluminate","Gallide","Gallide","Indide","Indide","Thallide","Thallide","Germanide","Germanide","Stannide","Stannide","Plumbide","Plumide","Bismuthide","Bismuthide","Polonide","Polonide","Hydrate","Carbate","Nitrate","Phosphate","Oxate","Sulfate","Selenate","Fluorate","Chlorate","Bromate","Iodate","Astatate","Chlorate","Chlorate","Chlorite","Chlorite","Bromate","Bromate","Bromite","Bromite","Iodate","Iodate","Iodite","Iodite","Astatate","Astatate","Astatite","Astatite","Oxide","Oxide","Oxide","Sulfate","Sulfate","Sulfite","Disulfate","Disulfite","Dithiosulfate","Disulfite","Sulfite","Sulfate", "Sulfate","Selenate","Selenate","Selenite","Diselenopentoxide","Diselenoheptoxide"]
+
+            var ionNameZ = ["Bohrate","Ferride","Ferride","Ruthenite","Ruthenite","Ruthenite","Ruthenite","Hyporuthenite","Hyporuthenite","Hyporuthenite","Osmiate","Osmiate","Osmiate","Osmiate","Hypoosmiite","Hypoosmiite","Hypoosmiite","Hassate","Hypocobaltite","Cobaltate","Rhodide","Rhodide","Iridate","Hypoiridite","Nickelate","Nickelate","Hyponickelite","Palladate","Palladate","Platinide","Platinide","Cuprite","Hypocuprite","Argentate","Aurate","Aurate","Zincate","Cadmate","Hypomercurite","Mercurate","Aluminide","Gallate","Gallite","Indite","Indate","Thallate","Thallite","Germanite","Germanate","Stannate","Stannite","Plumbate","Plumbite","Bismuthate","Bismuthite","Polonate","Polonite","Monohydrate","Carbite","Nitrite","Phosphite","Oxite","Sulfite","Selenite","Fluorite","Chlorite","Bromite","Iodite","Astatite","Chlorite","Hypochlorite","Hypochlorite","Hypochlorite","Bromite","Hypobromite","Hypobromite","Hypobromite","Iodite","Hypoiodite","Hypoiodite","Hypoiodite","Astatite","Hypoastatite","Hypoastatite","Hypoastatite","Hypoxide","Dioxide","Trioxide","Sulfide","Sulfide","Sulfide","Disulfopentoxate","Disulfoheptoxate","Disulfotrioxide","Disulfohexoxide","Thionate","Sulfite","Sulfite","Selenide","Selenide","Selenide","Diperselenite","Diperselenate"]
+
+            var ionNameZZ = ["Perbohrate","Perferrite","Perferrate","Perruthenate","Perruthenate","Perruthenate","Perruthenate","Perruthenate","Perruthenate","Perruthenate","Perosmiate","Perosmiate","Perosmiate","Perosmiate","Perosmiate","Perosmiate","Perosmiate","Perhassate","Percobaltate","Percobaltate","Perrhodate","Hyporhodite","Periridate","Periridate","Pernickelate","Pernickelate","Pernickelate","Hypopalladite","Hypopalladite","Hypoplatinite","Hypoplatinite","Percuprate","Percuprate","Peragentate","Peraurate","Peraurate","Perzincate","Hypocadmite","Permercurate","Permercurate","Peraluminate","Pergallate","Hypogallite","Perindate","Hypoindie","Hypothallite","Perthallate","Hypogermanite","Pergermanate","Perstannate","Hypostannite","Hypoplumbite","Perplumbate","Hypobismuthite","Perbismuthate","Hypoplonite","Perpolonate","Perhydrate","Percarbate","Pernitrate","Perphosphate","Peroxide","Hyposulfite","Perselenate","Hypofluorite","Perchlorate","Hypobromite","Periodate","Hypoastatite","Perchlorate","Perchlorate","Perchlorate","Chlorate","Perbromate","Perbromate","Perbromate","Bromate","Periodate","Periodate","Periodate","Iodate","Perastatate","Perastatate","Perastatate","Astatate","Dioxide","Peroxide","Peroxide","Persulfate","Persultfate","Persulfate","Persulfite","Dipersulfate","Perthiosulfate","Disulfide","Persulfate","Hydrosulfate","Hydrosulfate","Perselenate","Perselenate","Perselenate","Perselenite","Perselenate"]
+
+            var explanation = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3]
+
+            
+
+        $(document).ready(function() {
+
+           $("#sessionBegin").on('click',function(){
+
+            
+
+            $("#main").fadeOut(100);
+            $("#dialog").dialog('open');
+
+            //alert(ionArray.length);
+            //alert(ionArray[10].ionName);
+            //alert(ionArray[10].explanation);
+            
+          });
+
+            $("#dialog").dialog({
+
+            dialogClass: "no-close",
+            width:'1050',
+            height: '650',
+            autoOpen: false,
+            buttons: [  {
+                text: "Quit",
+                click: function() {
+                  $(this).dialog ("close");
+
+                  closeEverything();
+
+                  $("#main").fadeIn(500);
+
+                  }
+                }  
+              
+              ]
+
+            });
+
+            $("#yourName").fadeIn(500);
+
+          
+
+           $("#submitName").on('click',function(){
+
+              practiceName=document.getElementById("inputYourName").value
+              checkIsValid(practiceName);
+
+           });
+
+             $('#allIons').on('click', function(){
+              quizType = 1;
+              $('#quizType').fadeOut(300);
+              selectQuizType();
+            });
+              $('#ionsYouMustKnow').on('click', function(){
+              quizType = 2;
+              $('#quizType').fadeOut(300);
+              selectQuizType();
+            });
+               $('#allPolyatomicIons').on('click', function(){
+              quizType = 3;
+              $('#quizType').fadeOut(300);
+              selectQuizType();
+            });
+               $('#polyatomicIonsYouMustKnow').on('click', function(){
+              quizType = 4;
+              $('#quizType').fadeOut(300);
+              selectQuizType();
+            });
+                $('#monoatomicIons').on('click', function(){
+              quizType = 5;
+              $('#quizType').fadeOut(300);
+              selectQuizType();
+            });
+
+            $('#q10').on('click', function(){
+              numQ=10;
+              timer();
+           })
+            $('#q25').on('click', function(){
+              numQ=25;
+              timer();
+           })
+           $('#q50').on('click', function(){
+              numQ=50;
+              timer();
+           })
+           $('#q100').on('click', function(){
+              numQ=100;
+              timer();
+            });
+           $('#timer5').on('click', function(){
+              time=5000;
+              start();
+           })
+           $('#timer8').on('click', function(){
+              time=8000;
+              start();
+           })
+           $('#timer10').on('click', function(){
+              time=10000;
+              start();
+           })
+           $('#timer15').on('click', function(){
+              time=15000;
+              start();
+           })
+           $('#timerNone').on('click', function(){
+              time=0;
+              start();
+           })
+
+
+
+            $('#answerA').on('click', function(){
+              clearInterval(timeInterval);
+              ans=ans1
+              $('#clock').hide()
+              handleAnswer()
+            });
+             $('#answerB').on('click', function(){
+              clearInterval(timeInterval);
+              ans=ans2
+              $('#clock').hide()
+              handleAnswer()
+            });
+            $('#answerC').on('click', function(){
+              clearInterval(timeInterval);
+              ans=ans3
+              $('#clock').hide()
+              handleAnswer()
+            });
+             $('#answerD').on('click', function(){
+              clearInterval(timeInterval);
+              ans=ans4
+              $('#clock').hide()
+              handleAnswer()
+            });
+             $('#answerE').on('click', function(){
+              clearInterval(timeInterval);
+              ans=ans5
+              $('#clock').hide()
+              handleAnswer()
+            });
+          
+            $("#startButton").on('click', function() {
+
+                $('#titlespan').css('display','none');
+                $('#startButton').css('display','none');
+
+                numCorrectAnswers = 0;
+
+                shuffleIons();
+
+                $('#explanation').fadeIn(500)
+                
+           
+
+                play();
+
+                });
+
+            $("#nextQuestionCorrect").on('click', function() {
+
+                $('#correctAnswerSpan').css('display','none');
+
+                $('#questionIon').empty();
+                $('#answerA').empty();
+                $('#answerB').empty();
+                $('#answerC').empty();
+                $('#answerD').empty();
+                $('#answerE').empty();
+                $('#correctAnswer').empty();
+                $('#explanationText').empty();
+                $('#hours').empty();
+                $('#minutes').empty();
+                $('#seconds').empty();
+
+                questionNumbers.push(i+1);
+                userAnswers.push(ans);
+                correctAnswers.push(ans);
+                ionSymbols.push(ionSymbol)
+                numCorrectAnswers = numCorrectAnswers+1
+                //alert(numCorrectAnswers);
+                //alert(questionNumbers);
+                //alert(userAnswers);
+                //alert(correctAnswers);
+                //alert(ionSymbols);
+
+
+                play();
+
+            });
+          
+            $('#nextQuestionIncorrect').on('click', function()  {
+
+              $('#incorrectAnswerSpan').css('display','none');
+              $('#questionIon').empty();
+                $('#answerA').empty();
+                $('#answerB').empty();
+                $('#answerC').empty();
+                $('#answerD').empty();
+                $('#answerE').empty();
+                $('#incorrectAnswer').empty();
+                $('#explanationText').empty();
+                $('#hours').empty();
+                $('#minutes').empty();
+                $('#seconds').empty();
+
+                questionNumbers.push(i+1);
+                userAnswers.push(ans);
+                //if (quizType==1) {
+
+                  correctAnswers.push(correctAns);
+                  ionSymbols.push(ionSymbol)
+
+                //}
+                //alert(questionNumbers);
+                //alert(userAnswers);
+                //alert(correctAnswers);
+                //alert(ionSymbols);
+
+                play();
+
+            });
+
+            $('#seeResults').on('click',function() {
+
+              accessoryWindow("resultsScreen.html","",900, 700)
+
+            })
+
+            $('#morePractice').on('click',function() {
+
+              closeEverything();
+
+            })
+
+
+        
+
+
+          function checkIsValid(a) {
+
+                  if(isValid(a)) {
+
+                    hideName();
+
+                    }
+
+                }
+
+
+
+          function isValid(a) {
+          
+            var re = /.+/;
+            if(!a.match(re)) {
+
+             alert("You Must Enter a Name")
+
+             return false;
+
+            }
+
+            return true; //get here if data passes conditions
+
+          }
+
+          function hideName() {
+
+            $('#yourName').fadeOut(100);
+
+            $('#quizType').fadeIn(500);
+ 
+          } 
+
+          function selectQuizType() {
+
+            //alert("got to select quiz type");
+
+            if (quizType==1) {
+
+              for(var a=0; a<ionArray.length;a++) {
+
+                useThisArray.push(ionArray[a]);
+                //alert(useThisArray[a].ionId + ' , ' + useThisArray[a].ions + ' , ' + useThisArray[a].ionName);
+
+              }
+
+            } else if (quizType==2) {
+
+              for(var j=0; j<youMustKnowIndices.length;j++) {
+
+                var useIndex = youMustKnowIndices[j];
+
+                useThisArray.push(ionArray[useIndex]);
+
+              alert(useThisArray[j].ionId + ' , ' + useThisArray[j].ions  + ' , ' + useThisArray[j].ionName  + ' , ' + useThisArray[j].ionCharge  + ' , ' + useThisArray[j].ionNameA  + ' , ' + useThisArray[j].ionNameB  + ' , ' + useThisArray[j].ionNameC  + ' , ' + useThisArray[j].ionNameD);
+              
+                }
+
+            } else if (quizType==5) {
+
+              for(var j=0; j<monoatomicIonIndices.length;j++) {
+
+                var useIndex = monoatomicIonIndices[j];
+
+                useThisArray.push(ionArray[useIndex]);
+
+              alert(useThisArray[j].ionId + ' , ' + useThisArray[j].ions  + ' , ' + useThisArray[j].ionName  + ' , ' + useThisArray[j].ionCharge  + ' , ' + useThisArray[j].ionNameA  + ' , ' + useThisArray[j].ionNameB  + ' , ' + useThisArray[j].ionNameC  + ' , ' + useThisArray[j].ionNameD);
+              
+                }
+
+
+            }
+
+             
+
+            setTimeout(getNumQ, 300);
+
+          }
+
+           function getNumQ() {
+
+            $('#qNum').fadeIn(500)
+            
+            }
+
+           function timer() {
+
+            $('#qNum').fadeOut(100);
+
+            $('#timerAmount').fadeIn(500);
+
+            }
+
+
+          function start() {
+            $('#timerAmount').fadeOut(100, startButton)
+            
+
+            //alert(practiceName + " would like " + numQ + " questions" )
+          }
+
+          function startButton() {
+            
+            $('#titlespan').append("<span class='smallerblackarial'>" + practiceName +", Begin your practice session of " + numQ + " questions by clicking the 'Start Practice' button.").fadeIn(300);
+            $('#startButton').fadeIn(1000);
+
+              }
+
+         function play() {
+
+               //alert("qNumber: " + qNumber + "\r" +"numQ: " + numQ)
+
+                i = qNumber - 1;
+               //alert(i)
+
+               if(qNumber == numQ + 1) {
+
+                  practiceFinished()
+
+                } else {
+
+                $('#question').fadeIn(300);
+
+                //alert(useThisArrayions[i]+ionCharge[i])
+
+                $('#questionIon').append("</br></br>"  +  useThisArray[i].ions + useThisArray[i].ionCharge);
+
+                var ionArrays = [useThisArray[i].ionName,useThisArray[i].ionNameA,useThisArray[i].ionNameB,useThisArray[i].ionNameC,useThisArray[i].ionNameD]
+                //alert(ionArrays[0], ionArrays[1])
+
+                  ionSymbol = useThisArray[i].ions + useThisArray[i].ionCharge;
+                  }
+
+                ans1 = ionArrays.splice(Math.floor(Math.random()*5),1)
+                //alert(ans1)
+                ans2 = ionArrays.splice(Math.floor(Math.random()*4),1)
+                //alert(ans2)
+                ans3 = ionArrays.splice(Math.floor(Math.random()*3),1)
+                //alert(ans3)
+                ans4 = ionArrays.splice(Math.floor(Math.random()*2),1)
+                //alert(ans4)
+                ans5 = ionArrays.splice(0,1)
+                //alert(ans5)
+        
+
+                $('#answerA').append(ans1).prop('disabled',false);
+                
+                 $('#answerB').append(ans2).prop('disabled',false);
+               
+                 $('#answerC').append(ans3).prop('disabled',false);
+               
+                 $('#answerD').append(ans4).prop('disabled',false);
+
+                 $('#answerE').append(ans5).prop('disabled',false);
+
+
+                 if(time!=0) {
+                   
+                  $('#clock').fadeIn(0);
+
+                  var deadline = Date.parse(new Date())+time
+                  //alert(deadline);
+                  initializeClock('clock',deadline)
+
+
+                 }
+
+                }
+
+                function getTimeRemaining(endtime) { 
+
+                    //alert('got to time remaining')
+                    //alert(endtime)
+
+                    var t = endtime - Date.parse(new Date());
+                    //alert(t)
+                    var tseconds = Math.floor( (t/1000) % 60 );
+                    //alert(tseconds)
+                    var tminutes = Math.floor( (t/1000/60) % 60 );
+                    //alert(tminutes)
+                    var thours = Math.floor( (t/(1000*60*60)) % 24 );
+                    //alert(thours)
+
+                   return {
+
+                    'total':t,
+                    'thours':thours,
+                    'tminutes':tminutes,
+                    'tseconds':tseconds
+
+                   };
+
+                  }
+
+                function initializeClock(id,endtime) {
+
+                    //alert('got to initialize clock');
+                    //alert(id);
+                    //alert(endtime);
+
+                  var clock = document.getElementById(id);
+                  //alert(clock);
+                  var hoursSpan = clock.querySelector('#hours');
+                  //alert(hoursSpan);
+                  var minutesSpan = clock.querySelector('#minutes');
+                  //alert(minutesSpan);
+                  var secondsSpan = clock.querySelector('#seconds');
+                  //alert(secondsSpan);
+                  
+                  function updateClock() {
+                    var t = getTimeRemaining(endtime);
+                    //alert(t)
+
+                    hoursSpan.innerHTML = ('0'+t.thours).slice(-2);
+                    minutesSpan.innerHTML = ('0'+t.tminutes).slice(-2);
+                    secondsSpan.innerHTML = ('0'+t.tseconds).slice(-2);
+
+                    if(t.total<=0) {
+                      
+                      qTimedOut()
+                      
+                      }
+                    }
+                    updateClock();
+                    timeInterval = setInterval(updateClock,1000);
+
+                  }
+
+                function qTimedOut() {
+
+                  clearInterval(timeInterval);
+                  //alert('got to qTimedOut')
+
+                  ans = "Timed Out"
+                  handleAnswer()
+
+                }
+            
+              
+
+        function shuffleIons(){
+
+
+          var currentIndex = useThisArray.length 
+          alert(useThisArray.length + ' , ' + currentIndex)
+          var randomIndex;
+          var temporaryIonArray;
+          //var temporaryValueIonId;
+          //var temporaryValueIons;
+          //var temporaryValueIonCharge;
+          //var temporaryValueIonName;
+          //var temporaryValueIonNameA;
+          //var temporaryValueIonNameB;
+          //var temporaryValueIonNameC;
+          //var temporaryValueIonNameD;
+          //var temporaryValueExplanation;
+
+         
+            while (0 !== currentIndex) {
+
+//pick a remaining element . . .
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        //alert(randomIndex)
+        currentIndex -= 1;
+        //alert(currentIndex)
+
+        //and swap it with the current element
+        //alert(useThisArrayIons[currentIndex]);
+        //alert(useThisArrayIonCharge[currentIndex]);
+        //alert(useThisArrayIonName[currentIndex]);
+
+        temporaryIonArray = useThisArray[currentIndex]
+
+        //temporaryValueIonId = useThisArray[currentIndex].ionId;
+        //alert(temporaryIonArray.ionId);
+        //temporaryValueIons = useThisArray[currentIndex].ions;
+        //alert(temporaryIonArray.ions);
+        //temporaryValueIonCharge = useThisArray[currentIndex].ionCharge;
+        //alert(temporaryIonArray.ionCharge);
+        //temporaryValueIonName = useThisArray[currentIndex].ionName;
+        //alert(temporaryIonArray.ionName);
+        //temporaryValueIonNameA = useThisArray[currentIndex].ionNameA;
+        //temporaryValueIonNameB = useThisArray[currentIndex].ionNameB;
+        //temporaryValueIonNameC = useThisArray[currentIndex].ionNameC;
+        //temporaryValueIonNameD = useThisArray[currentIndex].ionNameD;
+        //temporaryValueExplanation = useThisArray[currentIndex].explanation;
+
+
+        //alert(randomIndex)
+        //alert(useThisArrayIons[randomIndex]);
+        //alert(useThisArrayIonCharge[randomIndex]);
+        //alert(useThisArrayIonName[randomIndex]);
+
+        useThisArray[currentIndex] = useThisArray[randomIndex]
+
+        //useThisArray[currentIndex].ionId = useThisArray[randomIndex].ionId
+        //alert(useThisArray[currentIndex].ionId);
+        //useThisArray[currentIndex].ions = useThisArray[randomIndex].ions;
+        //alert(useThisArray[currentIndex].ions);
+        //useThisArray[currentIndex].ionCharge = useThisArray[randomIndex].ionCharge;
+        //alert(useThisArray[currentIndex].ionCharge);
+        //useThisArray[currentIndex].ionName = useThisArray[randomIndex].ionName;
+        //alert(useThisArray[currentIndex].ionName);
+        //useThisArray[currentIndex].ionNameA = useThisArray[randomIndex].ionNameA;
+        //useThisArray[currentIndex].ionNameB = useThisArray[randomIndex].ionNameB;
+        //useThisArray[currentIndex].ionNameC = useThisArray[randomIndex].ionNameC;
+        //useThisArray[currentIndex].ionNameD = useThisArray[randomIndex].ionNameD;
+        //useThisArray[currentIndex].explanation = useThisArray[randomIndex].explanation;
+
+        useThisArray[randomIndex] = temporaryIonArray;
+
+        //useThisArray[randomIndex].ionId = temporaryValueIonId;
+        //useThisArray[randomIndex].ions = temporaryValueIons;
+        //alert(useThisArray[randomIndex].ions);
+        //useThisArray[randomIndex].ionCharge = temporaryValueIonCharge
+        //alert(useThisArray[randomIndex].ionCharge);
+        //useThisArray[randomIndex].ionName = temporaryValueIonName
+        //useThisArray[randomIndex].ionNameA = temporaryValueIonNameA
+        //useThisArray[randomIndex].ionNameB = temporaryValueIonNameB
+        //useThisArray[randomIndex].ionNameC = temporaryValueIonNameC
+        //useThisArray[randomIndex].ionNameD = temporaryValueIonNameD
+        //useThisArray[randomIndex].explanation = temporaryValueExplanation
+
+        
+
+      }
+        //alert(useThisArrayIons)
+        //alert(useThisArrayIonCharge)
+        //alert(useThisArrayIonName)
+        //alert(useThisArrayIonNameX)
+        //alert(useThisArrayIonNameY)
+        //alert(useThisArrayIonNameZ)
+        //alert(useThisArrayIonNameZZ)
+        //alert(useThisArrayExplanation)
+        alert(useThisArray[0].ionId + " , " + useThisArray[0].ionName + "\r" +
+              useThisArray[1].ionId + " , " + useThisArray[1].ionName + "\r" +
+              useThisArray[2].ionId + " , " + useThisArray[2].ionName + "\r" +
+              useThisArray[3].ionId + " , " + useThisArray[3].ionName + "\r" +
+              useThisArray[4].ionId + " , " + useThisArray[4].ionName + "\r" +
+              useThisArray[5].ionId + " , " + useThisArray[5].ionName + "\r" +
+              useThisArray[6].ionId + " , " + useThisArray[6].ionName + "\r" +
+              useThisArray[7].ionId + " , " + useThisArray[7].ionName + "\r" +
+              useThisArray[8].ionId + " , " + useThisArray[8].ionName + "\r" +
+              useThisArray[9].ionId + " , " + useThisArray[9].ionName + "\r" +
+              useThisArray[10].ionId + " , " + useThisArray[10].ionName + "\r" +
+              useThisArray[11].ionId + " , " + useThisArray[11].ionName + "\r" +
+              useThisArray[12].ionId + " , " + useThisArray[12].ionName + "\r" +
+              useThisArray[13].ionId + " , " + useThisArray[13].ionName )
+
+      return useThisArray
+        }
+
+      
+
+        function handleAnswer(){
+
+          //alert('got to handle answer ' + ans)
+
+          qNumber = qNumber + 1
+
+          //alert("next question number " + qNumber)
+          $('#answerA').prop('disabled',true)
+          $('#answerB').prop('disabled',true)
+          $('#answerC').prop('disabled',true)
+          $('#answerD').prop('disabled',true)
+          $('#answerE').prop('disabled',true)
+          //alert(ans + ionName[i])
+
+          explanationIndex = useThisArray[i].explanation;
+
+
+
+          if(ans==useThisArray[i].ionName) {
+
+            correctAnswer();
+
+          } else { 
+
+            incorrectAnswer();
+
+          }
+
+        }
+
+        function correctAnswer() {
+
+          //alert("got to correct answer")
+
+           $('#correctAnswer').append("</br><span class='smallerblackarial'>You answered " + ans + ".  This is <span class='blue'>CORRECT</span>!</span></br>");
+           $('#correctAnswerSpan').fadeIn(500);
+
+           getExplanation();
+
+           $('#explanationText').append(explanationActual);
+
+          getTermWindows();
+           
+         }
+
+        function incorrectAnswer() {
+          //alert("got to incorrect Answer")
+         
+
+            correctAns = useThisArray[i].ionName;
+            //alert(correctAns)
+
+      
+
+          $('#incorrectAnswer').append("</br><span class='smallerblackarial'>You answered <span class='red'>" + ans + "</span>.  This is <span class='red'>INCORRECT</span>.</br>The correct answer is <span class='blue'>" + correctAns + "</span></span></br>");
+           $('#incorrectAnswerSpan').fadeIn(500);
+
+           getExplanation();
+           
+           $('#explanationText').append(explanationActual);
+
+           getTermWindows();
+
+        }
+
+
+
+
+        function getExplanation() {
+
+          var explanationList = ["This ion is a <span id='monoatomic' class='blue' style='cursor:help'>monoatomic</span> ion as indicated by having the symbol of only a single element with no subscript (" + useThisArray[i].ions + "), and a <span id='cation' class='blue' style='cursor:help'>cation</span> as indicated by its positive charge.</br></br>Because a cation will always be the first component of any <span id='binary' class='blue' title='A binary ionic compound is one that is composed of two components-a cation component composed of one or more particles of the cation, listed first in the formula, and an anion component composed of a number of particles of anion that brings the compound formula into electrical balance, listed second in the formula.'> binary ionic compound</span>, <span style='text-decoration:underline;font-weight:600'>the name of any monoatomic cation will always simply be the element name.</span></br></br>", 
+
+            "If the cation is from group IA, IIA, or is Aluminum in IIIA, as is the case with this ion, (" + useThisArray[i].ions + useThisArray[i].ionCharge + "), no Roman numerals indicating charge are necessary.",
+
+            "However, if the ion is a transition metal or a post-transition metal, as is the case with this ion, (" + useThisArray[i].ions + useThisArray[i].ionCharge + "), as the ion may have one of multiple oxidation states (charges), it is desirable that a Roman numeral representing the oxidation state (charge) be included in the name-<span style='font-weight:600'>" + useThisArray[i].ionName + "</span>",
+
+            "This ion is a <span id='monoatomic' class='blue' title='A monoatomic ion is an ion that is composed of a single atom of a single element.' style='cursor:help'>monoatomic</span> ion as indicated by having the symbol of only a single element with no subscript (" + useThisArray[i].ions + "), and an <span id='anion' class='blue' title='An anion is an ion with a negative charge.' style='cursor:help'>anion</span> as indicated by its negative charge.</br></br>An anion will always be the second component of any <span id='binary' class='blue' title='A binary ionic compound is one that is composed of two components-a cation component composed of one or more particles of the cation, listed first in the formula, and an anion component composed of a number of particles of anion that brings the compound formula into electrical balance, listed second in the formula.' style='cursor:help'> binary ionic compound.</span></br></br>For all monoatomic anions the name is formed from the element name by dropping the last few letters of this name and adding the suffix <span style='font-weigh: 600'>-ide</span>.  In this case, <span style='font-weight: 600'>" + useThisArray[i].ionName + "</span></br></br>There are no specific rules for how many letters to drop from the element name before adding -ide.  It is mainly based on what sounds best phonetically-you will pick up these names quickly.",
+
+            "This ion is a <span id='polyatomic' class='blue' title='' style='cursor:help'>polyatomic ion</span> as indicated by the fact that it is composed of more than one atom.  The atoms composing polyatomic ions are usually from different elements as in this case (" + useThisArray[i].ions + useThisArray[i].ionCharge + ") but may also be from the same element.</br></br>Remember that the atoms composing these ions are covalently bonded and the whole structure contains the charge of the ion.  The whole structure is viewed as a unit-the individual atoms of the ion are not considered seperately."
+
+
+             
+
+             ]
+             
+            
+          
+
+
+
+
+          if (explanationIndex==0){
+
+            explanationActual=explanationList[0] + explanationList[1] 
+
+          } else if (explanationIndex==1){
+
+            explanationActual=explanationList[0] + explanationList[2] 
+
+          } else if (explanationIndex==2){
+
+            explanationActual=explanationList[3] 
+
+          } else if (explanationIndex==3){
+
+            explanationActual=explanationList[4]
+
+          } else {
+
+            explanationActual=""
+
+          }
+
+
+          return explanationActual;
+
+
+
+        }
+        
+
+        function practiceFinished(){
+
+          $('#question').fadeOut(100);
+          $('#explanation').fadeOut(100);
+          $('#clock').fadeOut(100);
+
+           $('#practiceOverText').append(practiceName + ", your practice session of " + numQ + " questions is finished-</br></br>");
+           $('#practiceOver').fadeIn(500);
+
+        }
+
+        function accessoryWindow(windowURL,title,w,h) {
+
+          //alert("got to result screen")
+
+            if(!newWina||newWina.closed) {  //says "if there is no window"
+
+              var left = (screen.width/2)-(w/2); //sets practice/quiz window to middle of the screen
+              var top = (screen.height/2)-(h/2);
+
+              newWina = window.open(windowURL,title, "status,height="+h+","+"width="+w+",top="+top+",left="+left);
+              //gathers open window info from practice or quiz function
+
+              $('#newWina').on('beforeunload',function(evt){ 
+
+                window.location.reload(false);
+
+              });          
+
+            } else {
+
+            //window's already open
+            newWina.focus();
+
+             }
+
+            return false;
+
+            }
+
+          function getTermWindows() {
+            $('#monoatomic').on('click', function() {
+                accessoryWindow('monoatomic.html','',500,500)
+              });
+            $('#cation').on('click', function() {
+              accessoryWindow('cation.html','',500,500)
+            })
+
+          }
+
+          function closeEverything() {
+
+            $('#titlespan').empty()
+               $('#quiztype').css('display','none')
+               $('#qNum').css('display','none')
+               $('#timerAmount').css('display','none')
+               $('#startButton').css('display','none')
+               $('#question').css('display','none')
+               $('#practiceOver').css('display','none')
+               $('#correctAnswerSpan').css('display','none')
+               $('#incorrectAnswerSpan').css('display','none')
+               $('#explanation').css('display','none')
+               $('#correctAnswerSpan').css('display','none');
+               $('#clock').css('display','none');
+                $('#questionIon').empty();
+                $('#answerA').empty();
+                $('#answerB').empty();
+                $('#answerC').empty();
+                $('#answerD').empty();
+                $('#answerE').empty();
+                $('#correctAnswer').empty();
+                $('#incorrectAnswer').empty();
+                $('#explanationText').empty();
+                $('#hours').empty();
+                $('#minutes').empty();
+                $('#seconds').empty();
+                $('#practiceOverText').empty();
+               $("#yourName").fadeIn(500);
+
+
+               answer="";
+               qNumber = 1;
+               ans="";
+               ans1="";
+               ans2="";
+               ans3="";
+               ans4="";
+               ans5="";
+               i=0;
+               quizType="";
+               time=0;
+               useThisArray = []
+               //useThisArrayIons = []
+               //useThisArrayIonName = [];
+               //useThisArrayIonCharge = [];
+               //useThisArrayIonNameA = [];
+               //useThisArrayIonNameB = [];
+               //useThisArrayIonNameC = [];
+               //useThisArrayIonNameD = [];
+               //useThisArrayExplanation = [];
+               questionNumbers = [];
+               userAnswers = [];
+               correctAnswers = [];
+               
+              
+               numCorrectAnswers=0;
+             
+               ionSymbols = []
+
+            }  
+
+      }); 
+
+
+
+        </script>
+
+<body class="ltgrn">
+
+  <!--This div contains the splash page info-->
+  <div id="main"> 
+
+    <header id="ionNamingHeader" class="header">
+
+      <h1 id="ionNamingh1" class="header" >DMar Science</h1>
+
+      <h2 id="ionNamingh2" class="header">Ion Naming Practice</h2>
+
+      <address id="ionNamingaddress" class="header">
+        Copyright  &copy; 2008-2017,  C. Jay Marshall, M.D.<a href="http://www.dmarscience.com/index.html"><img src="dmarlogosmall.png"></a><br>
+        Revised - <script>
+                  var modifieddate=document.lastModified
+                  document.write(modifieddate)
+                  </script><br>
+        Email: <a href="mailto:cjaymarshall1@hotmail.com"> cjaymarshall1@hotmail.com </a><br>
+        URL: <a href="http://www.dmarscience.com/index.html">www.dmarscience.com</a>
+      </address>
+
+    </header>
+
+    <p style="width:80%;margin:auto">
+
+      <span class="smallerblackarial">Welcome to the <span class="marooncomic">DMar Science</span> Ion Naming Practice Application.</br></br>
+        This simple, intuitive, easy to use application contains the formulas and names of over 200 ions.</br></br>  For each question an ion formula is given and five possible names are presented in a multiple choice format.  The user answer is selected by clicking on the desired choice.  Instant feedback, including a brief explanation (although this app is designed for high volume practice so explanation is kept to a minimum), is provided for each question.</br></br>
+
+        Features incude:
+
+            <ul class="smallermaroonarial indent" style="width:80%">
+              <li>Options for quizzes with 10, 25, 50 or 100 questions</br></li>
+              <li>Options for "All Ions," "Ions You Must Know," "All Polyatomic Ions," "Polyatomic Ions You Must Know," and "Monoatomic Ions"</br></li>
+              <li>Options for time limits on questions</br></li>
+              <li>Detailed listing of results with option for printing</li>
+            </ul>
+          
+          <p style="text-align:center;">  
+            *No personal or scoring information is retained by this application.</br>
+          <button class="button" type="button" id="sessionBegin" style="font-size:28px;">Begin Practice!</button>
+          </p>
+
+      </span>
+ 
+    </p>
+
+  <div id="dialog" title="Ion Naming Practice">
+
+	<!--<span id="titlespan" class="blackemmajor" style="display:none;"></span>-->	
+
+	<span id="yourName" class="smallerblackarial" style="display:none;">Enter a name to use:
+
+		<input type="text" id="inputYourName" />
+    <button class="button" type="button" id="submitName">Submit Name</button>
+
+  </span>
+
+
+  <span id="quizType" class="smallerblackarial" style="display:none">What types of ions do you want to practice naming?</br>
+
+     <span class="indent"> 
+
+      <button class="button" type="button" id="allIons">All Ions</button></br>
+      <button class="button" type="button" id="ionsYouMustKnow">Ions You Must Know</button></br>
+      <button class="button" type="button" id="allPolyatomicIons">All Polyatomic Ions</button></br>
+      <button class="button" type="button" id="polyatomicIonsYouMustKnow">Polyatomic Ions You Must Know</button></br>
+      <button class="button" type="button" id="monoatomicIons">Monoatomic Ions</button></br>
+
+    </span>
+
+  </span>
+
+
+
+
+	<span id="qNum" class="smallerblackarial" style="display:none">How many questions do you want?</br>
+
+     <span class="indent"> 
+
+      <button class="button" type="button" id="q10">10 Questions</button></br>
+      <button class="button" type="button" id="q25">25 Questions</button></br>
+      <button class="button" type="button" id="q50">50 Questions</button></br>
+      <button class="button" type="button" id="q100">100 Questions</button></br>
+
+    </span>
+
+
+
+  </span>
+
+  <span id="timerAmount" class="smallerblackarial" style="display:none">What time limit do you want for each question?</br>
+
+     <span class="indent"> 
+
+      <button class="button" type="button" id="timer5">5 seconds</button></br>
+      <button class="button" type="button" id="timer8">8 seconds</button></br>
+      <button class="button" type="button" id="timer10">10 seconds</button></br>
+      <button class="button" type="button" id="timer15">15 seconds</button></br>
+      <button class="button" type="button" id="timerNone">No time limit</button></br>
+     
+
+    </span>
+
+
+
+  </span>
+
+
+   <span class="indent"><button id="startButton" type="button" class="button" style="font-size:30px;display:none;">Start Practice</button></span>
+
+   <span id="question" style="display:none">
+
+      <span id="questionText" class="smallblackarialnocap">Select the correct name for the following ion:</span>
+
+      <span id="questionIon"  class="indentb smallblackarialnocap"></span></br></br>
+
+      <span id="answerButtons" class="indentb">
+      <button class=" smallblackarialnocap" id="answerA"></button></br>
+      <button class=" smallblackarialnocap" id="answerB"></button></br>
+      <button class=" smallblackarialnocap" id="answerC"></button></br>
+      <button class=" smallblackarialnocap" id="answerD"></button></br>
+      <button class=" smallblackarialnocap" id="answerE"></button></br>
+
+      </span>
+
+   </span>
+
+   <span id="practiceOver"  style="display:none">
+
+      <span id="practiceOverText" class="smallerblackarial"></span></br>
+      
+      <span class="indent">
+
+      <span class="smallerblackarial">To see a printable copy of your results, click</span>
+       <button class="button" id="seeResults">See Results</button></br></br>
+      <span class="smallerblackarial">To continue practicing, click</span>
+      <button class="button" id="morePractice">More Practice</button></br>
+     </span>
+
+   </span>
+
+    <span id="correctAnswerSpan"  style="display:none">
+
+      <span id="correctAnswer"></span>
+      <button class=" smallerarialnocap" id="nextQuestionCorrect">Next Question</button>
+
+    </span>
+
+    <span id="incorrectAnswerSpan"  style="display:none">
+
+      <span id="incorrectAnswer"></span>
+      <button class=" smallerarialnocap" id="nextQuestionIncorrect">Next Question</button>
+
+    </span>
+
+    <span id="explanation" style="display:none">
+
+      <span id="explanationTextTitle">Explanation:</span>
+      <div id="explanationText">
+      </div>
+     
+    </span>
+
+    <span id="clock" style="display:none">
+
+      <span id="timerTitle">Timer:</span>
+      <div id="timer">
+        <span id="hours" style="font-class:arial;font-size:30px;color:black;font-weight:800"></span>
+        <span style="font-class:arial;font-size:30px;color:black;font-weight:800">:</span>
+        <span id="minutes" style="font-class:arial;font-size:30px;color:black;font-weight:800"></span>
+        <span style="font-class:arial;font-size:30px;color:black;font-weight:800">:</span>
+        <span id="seconds" style="font-class:arial;font-size:30px;color:black;font-weight:800"></span>
+        
+      </div>
+
+    </span>
+
+  
+ </div>
+
+</div>
+
+</body>
+
+
+</html>
+
+  
