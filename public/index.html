@@ -143,6 +143,10 @@
             overflow:auto;
           }
 
+          .red {
+            color:red;
+          }
+
         </style>
 
         <script src="myjsjq.js"></script>
@@ -153,7 +157,9 @@
 
         var practiceName="";
         var quizType;
-           var numQ="";
+        var useThisArray = [];
+        var numQ="";
+        var time=0;
            var answer;
            var qNumber = 1;
            var ans;
@@ -163,7 +169,7 @@
            var ans4;
            var ans5;
            var i;
-           var useThisArray = [];
+           
            var questionNumbers = [];
            var userAnswers = [];
            var correctAnswers = [];
@@ -175,24 +181,24 @@
            var explanationIndex;
            var explanation;
            var explanationActual;
-           var time=0;
+           
            var timeInterval
 
-           var ions = ["Bh","Fe","Fe","Ru","Ru","Ru","Ru","Ru","Ru","Ru","Os","Os","Os","Os","Os","Os","Os","Hs","Co","Co","Rh","Rh","Ir","Ir","Ni","Ni","Ni","Pd","Pd","Pt","Pt","Cu","Cu","Ag","Au","Au","Zn","Cd","Hg","Hg","Al","Ga","Ga","In","In","Tl","Tl","Ge","Ge","Sn","Sn","Pb","Pb","Bi","Bi","Po","Po","H","C","N","P","O","S","Se","F","Cl","Br","I","At","ClO","ClO\u2082","ClO\u2083","ClO\u2084","BrO","BrO\u2082","BrO\u2083","BrO\u2084","IO","IO\u2082","IO\u2083","IO\u2084","AtO","AtO\u2082","AtO\u2083","AtO\u2084","O\u2082","O\u2082","O\u2083","SO\u2082","SO\u2083","SO\u2084","S\u2082O\u2085","S\u2082O\u2087","S\u2082O\u2083","S\u2082O\u2084","HSO\u2082","HSO\u2083","HSO\u2084","SeO\u2082","SeO\u2083","SeO\u2084","Se\u2082O\u2085","Se\u2082O\u2087","HSeO\u2082","HSeO\u2083","HSeO\u2084","TeO\u2082","TeO\u2083","TeO\u2084","TeO\u2085","TeO\u2086","Te\u2082O\u2081\u2080","HTeO\u2083","HTeO\u2084","N\u2083","NH\u2084","NH\u2082","NO\u2082","NO\u2083","HPO\u2082","H\u2082PO\u2082","HPO\u2083","H\u2082PO\u2083","PO\u2084","HPO\u2084","H\u2082PO\u2084","P\u2082O\u2087","AsO\u2082","AsO\u2083","As\u2082O\u2085","HAsO\u2083","H\u2082AsO\u2083","AsO\u2084","HAsO\u2084","H\u2082AsO\u2084","As\u2082O\u2087","BiO\u2083","CO\u2083","HCO\u2083","HCO\u2082","C\u2082H\u2083O\u2082","C\u2082O\u2084","HC\u2082O\u2084","CN","SCN","OCN","CNO","SiO\u2084","SiO\u2083","Si\u2082O\u2087","GeO\u2084","GeO\u2083","SnO\u2084","SnO\u2083","SnO\u2082","PbO\u2082","HPbO\u2082","PbO\u2084","PbO\u2083","HPbO\u2084"]
+           var ions = ["","","","","","","","","","","","","O\u2082","O\u2082","O\u2083","SO\u2082","SO\u2083","SO\u2084","S\u2082O\u2085","S\u2082O\u2087","S\u2082O\u2083","S\u2082O\u2084","HSO\u2082","HSO\u2083","HSO\u2084","SeO\u2082","SeO\u2083","SeO\u2084","Se\u2082O\u2085","Se\u2082O\u2087","HSeO\u2082","HSeO\u2083","HSeO\u2084","TeO\u2082","TeO\u2083","TeO\u2084","TeO\u2085","TeO\u2086","Te\u2082O\u2081\u2080","HTeO\u2083","HTeO\u2084","N\u2083","NH\u2084","NH\u2082","NO\u2082","NO\u2083","HPO\u2082","H\u2082PO\u2082","HPO\u2083","H\u2082PO\u2083","PO\u2084","HPO\u2084","H\u2082PO\u2084","P\u2082O\u2087","AsO\u2082","AsO\u2083","As\u2082O\u2085","HAsO\u2083","H\u2082AsO\u2083","AsO\u2084","HAsO\u2084","H\u2082AsO\u2084","As\u2082O\u2087","BiO\u2083","CO\u2083","HCO\u2083","HCO\u2082","C\u2082H\u2083O\u2082","C\u2082O\u2084","HC\u2082O\u2084","CN","SCN","OCN","CNO","SiO\u2084","SiO\u2083","Si\u2082O\u2087","GeO\u2084","GeO\u2083","SnO\u2084","SnO\u2083","SnO\u2082","PbO\u2082","HPbO\u2082","PbO\u2084","PbO\u2083","HPbO\u2084"]
 
-           var ionCharge = ["\u2077\u207A","\u00B2\u207A","\u00B3\u207A","\u00B2\u207A","\u00B3\u207A","\u2074\u207A","\u2075\u207A","\u2076\u207A","\u2077\u207A","\u2078\u207A","\u00B2\u207A","\u00B3\u207A","\u2074\u207A","\u2075\u207A","\u2076\u207A","\u2077\u207A","\u2078\u207A","\u2078\u207A","\u00B2\u207A","\u00B3\u207A","\u00B3\u207A","\u2074\u207A","\u00B3\u207A","\u2074\u207A","\u00B2\u207A","\u00B3\u207A","\u2074\u207A","\u00B2\u207A","\u2074\u207A","\u00B2\u207A","\u2074\u207A","\u207A","\u00B2\u207A","\u207A","\u207A","\u00B3\u207A","\u00B2\u207A","\u00B2\u207A","\u207A","\u00B2\u207A","\u00B3\u207A","\u207A","\u00B3\u207A","\u207A","\u00B3\u207A","\u207A","\u00B3\u207A","\u00B2\u207A","\u2074\u207A","\u00B2\u207A","\u2074\u207A","\u00B2\u207A","\u2074\u207A","\u00B3\u207A","\u2075\u207A","\u2074\u207A","\u2076\u207A","\u207B","\u2074\u207B","\u00B3\u207B","\u00B3\u207B","\u00B2\u207B","\u00B2\u207B","\u00B2\u207B","\u207B","\u207B","\u207B","\u207B","\u207B","\u207B","\u207B","\u207B","\u207B","\u207B","\u207B","\u207B","\u207B","\u207B","\u207B","\u207B","\u207B","\u207B","\u207B","\u207B","\u207B","\u00B2\u207B","\u207B","\u207B","\u00B2\u207B","\u00B2\u207B","\u00B2\u207B","\u00B2\u207B","\u00B2\u207B","\u00B2\u207B","\u00B2\u207B","\u207B","\u207B","\u207B","\u00B2\u207B","\u00B2\u207B","\u00B2\u207B","\u00B2\u207B","\u00B2\u207B","\u207B","\u207B","\u207B","\u00B2\u207B","\u00B2\u207B","\u00B2\u207B","\u2074\u207B","\u2076\u207B","\u2078\u207B","\u207B","\u207B","\u207B","\u207A","\u207B","\u207B","\u207B","\u00B2\u207B","\u207B","\u00B2\u207B","\u207B","\u00B3\u207B","\u00B2\u207B","\u207B","\u2074\u207B","\u207B","\u00B3\u207B","\u2074\u207B","\u00B2\u207B","\u207B","\u00B3\u207B","\u00B2\u207B","\u207B","\u2074\u207B","\u207B","\u00B2\u207B","\u207B","\u207B","\u207B","\u00B2\u207B","\u207B","\u207B","\u207B","\u207B","\u207B","\u2074\u207B","\u00B2\u207B","\u2076\u207B","\u2074\u207B","\u00B2\u207B","\u2074\u207B","\u00B2\u207B","\u00B2\u207B","\u00B2\u207B","\u207B","\u2074\u207B","\u00B2\u207B","\u00B3\u207B"]
+           var ionCharge = ["\u00B2\u207B","\u207B","\u207B","\u00B2\u207B","\u00B2\u207B","\u00B2\u207B","\u00B2\u207B","\u00B2\u207B","\u00B2\u207B","\u00B2\u207B","\u207B","\u207B","\u207B","\u00B2\u207B","\u00B2\u207B","\u00B2\u207B","\u00B2\u207B","\u00B2\u207B","\u207B","\u207B","\u207B","\u00B2\u207B","\u00B2\u207B","\u00B2\u207B","\u2074\u207B","\u2076\u207B","\u2078\u207B","\u207B","\u207B","\u207B","\u207A","\u207B","\u207B","\u207B","\u00B2\u207B","\u207B","\u00B2\u207B","\u207B","\u00B3\u207B","\u00B2\u207B","\u207B","\u2074\u207B","\u207B","\u00B3\u207B","\u2074\u207B","\u00B2\u207B","\u207B","\u00B3\u207B","\u00B2\u207B","\u207B","\u2074\u207B","\u207B","\u00B2\u207B","\u207B","\u207B","\u207B","\u00B2\u207B","\u207B","\u207B","\u207B","\u207B","\u207B","\u2074\u207B","\u00B2\u207B","\u2076\u207B","\u2074\u207B","\u00B2\u207B","\u2074\u207B","\u00B2\u207B","\u00B2\u207B","\u00B2\u207B","\u207B","\u2074\u207B","\u00B2\u207B","\u00B3\u207B"]
 
-           var ionName = ["Bohrium(VII)","Iron((II)","Iron(III)","Ruthenium(II)","Ruthenium(III)","Ruthenium(IV)","Ruthenium(V)","Ruthenium(VI)","Ruthenium(VII)","Ruthenium(VIII)","Osmium(II)","Osmium(III)","Osmium(IV)","Osmium(V)","Osmium(VI)","Osmium(VII)","Osmium(VIII)","Hassium(VIII)","Cobalt(II)","Cobalt(III)","Rhodium(III)","Rhodium(IV)","Iridium(III)","Iridium(IV)","Nickel(II)","Nickel(III)","Nickel(IV)","Palladium((II)","Palladium(IV)","Platinum(II)","Platinum(IV)","Copper(I)","Copper(II)","Silver(I)","Gold(I)","Gold(III)","Zinc(II)","Cadmium(II)","Mercury(I)","Mercury(II)","Aluminum","Gallium(I)","Gallium(III)","Indium(I)","Indium(III)","Thallium(I)","Thallium(III)","Germanium(II)","Germanium(IV)","Tin(II)","Tin(IV)","Lead(II)","Lead(IV)","Bismuth(III)","Bismuth(V)","Polonium(IV)","Polonium(VI)","Hydride","Carbide","Nitride","Phosphide","Oxide","Sulfide","Selenide","Fluoride","Chloride","Bromide","Iodide","Astatide","Hypochlorite","Chlorite","Chlorate","Perchlorate","Hypobromite","Bromite","Bromate","Perbromate","Hypoiodite","Iodite","Iodate","Periodate","Hypoastatite","Astatite","Astatate","Perastatate","Peroxide","Superoxide","Ozonide","Hyposulfite","Sulfite","Sulfate","Disulfite","Disulfate","Thiosulfate","Dithionate","Hydrogen Hyposulfite","Hydrogen Sulfite","Hydrogen Sulfate","Hyposelenite","Selenite","Selenate","Diselenite","Diselenate","Hydrogen Hyposelenite","Hydrogen Selenite","Hydrogen Selenate","Hypotellurite","Tellurite","Metatellurate","Pentaoxytellurate","Orthotellurate","Ditellurate","Hydrogen Tellurite","Hydrogen Tellurate","Azide","Ammonium","Amide","Nitrite","Nitrate","Hydrogen Hypophosphite","Dihydrogen Hypophosphite","Hydrogen Phosphite","Dihydrogen Phosphite","Phosphate","Hydrogen Phosphate","Dihydrogen Phosphate","Pyrophosphate","Metaarsenite","Arsenite","Pyroarsenite","Hydrogen Arsenite","Dihydrogen Arsenite","Arsenate","Hydrogen Arsenate","Dihydrogen Arsenate","Diarsenate","Bismuthate","Carbonate","Hydrogen Carbonate","Formate","Acetate","Oxalate","Hydrogen Oxalate","Cyanide","Thiocyanate","Cyanate","Fulminate","(Ortho)silicate","Silicate","Pyrosilicate","Orthogermanate","Germanate","Orthostannate","Stannate","Stannite","Plumbite","Hydrogen Plumbite","Orthoplumbate","Plumbate","Hydrogen Plumbate"]
+           var ionName = ["Peroxide","Superoxide","Ozonide","Hyposulfite","Sulfite","Sulfate","Disulfite","Disulfate","Thiosulfate","Dithionate","Hydrogen Hyposulfite","Hydrogen Sulfite","Hydrogen Sulfate","Hyposelenite","Selenite","Selenate","Diselenite","Diselenate","Hydrogen Hyposelenite","Hydrogen Selenite","Hydrogen Selenate","Hypotellurite","Tellurite","Metatellurate","Pentaoxytellurate","Orthotellurate","Ditellurate","Hydrogen Tellurite","Hydrogen Tellurate","Azide","Ammonium","Amide","Nitrite","Nitrate","Hydrogen Hypophosphite","Dihydrogen Hypophosphite","Hydrogen Phosphite","Dihydrogen Phosphite","Phosphate","Hydrogen Phosphate","Dihydrogen Phosphate","Pyrophosphate","Metaarsenite","Arsenite","Pyroarsenite","Hydrogen Arsenite","Dihydrogen Arsenite","Arsenate","Hydrogen Arsenate","Dihydrogen Arsenate","Diarsenate","Bismuthate","Carbonate","Hydrogen Carbonate","Formate","Acetate","Oxalate","Hydrogen Oxalate","Cyanide","Thiocyanate","Cyanate","Fulminate","(Ortho)silicate","Silicate","Pyrosilicate","Orthogermanate","Germanate","Orthostannate","Stannate","Stannite","Plumbite","Hydrogen Plumbite","Orthoplumbate","Plumbate","Hydrogen Plumbate"]
 
-            var ionNameX = ["Bohrium","Iron","Iron","Ruthenium","Ruthenium","Ruthenium","Ruthenium","Ruthenium","Ruthenium","Ruthenium","Osmium","Osmium","Osmium","Osmium","Osmium","Osmium","Osmium","Hassium","Cobalt","Cobalt","Rhodium","Rhodium","Iridium","Iridium","Nickel","Nickel","Nickel","Palladium","Palladium","Platinum","Platinum","Copper","Copper","Silver","Gold","Gold","Zinc","Cadmium","Mercury","Mercury","Aluminum(III)","Gallium","Gallium","Indium","Indium","Thallium","Thallium","Germanium","Germanium","Tin","Tin","Lead","Lead","Bismuth","Bismuth","Polonium","Polonium","Hydrogen","Carbon","Nitrogen","Phosphorus","Oxygen","Sulfur","Selenium","Fluorine","Chlorine","Bromine","Iodine","Astatine","Chlorine","Chlorine","Chlorine","Chlorine","Bromine","Bromine","Bromine","Bromine","Iodine","Iodine","Iodine","Iodine","Astatine","Astatine","Astatine","Astatine","Oxygen","Oxygen","Oxygen","Sulfite","Hyposulfite","Hyposulfite","Sulfite","Sulfite","Dithionate","Thionate","Hyposulfite", "Hydrogen Sulfate", "Hydrogen Sulfite","Selenite","Hyposelenite","Hyposelenite","Diselenate","Diselenite"]
+            var ionNameX = ["Oxygen","Oxygen","Oxygen","Sulfite","Hyposulfite","Hyposulfite","Sulfite","Sulfite","Dithionate","Thionate","Hyposulfite", "Hydrogen Sulfate", "Hydrogen Sulfite","Selenite","Hyposelenite","Hyposelenite","Diselenate","Diselenite"]
 
-            var ionNameY = ["Bohride","Ferrate","Ferrate","Ruthenate","Ruthenate","Ruthenate","Ruthenate","Ruthenide","Ruthenide","Ruthenide","Osmiide","Osmiide","Osmiide","Osmiide","Osmiite","Osmiite","Osmiite","Hasside","Cobaltide","Cobaltite","Rhodate","Rhodite","Iridide","Iridite","Nickelide","Nickelide","Nickelite","Palladide","Palladite","Platinate","Platinite","Cupride","Cupride","Argentide","Auride","Auride","Zincide","Cadmide","Mercuride","Mercuride","Aluminate","Gallide","Gallide","Indide","Indide","Thallide","Thallide","Germanide","Germanide","Stannide","Stannide","Plumbide","Plumide","Bismuthide","Bismuthide","Polonide","Polonide","Hydrate","Carbate","Nitrate","Phosphate","Oxate","Sulfate","Selenate","Fluorate","Chlorate","Bromate","Iodate","Astatate","Chlorate","Chlorate","Chlorite","Chlorite","Bromate","Bromate","Bromite","Bromite","Iodate","Iodate","Iodite","Iodite","Astatate","Astatate","Astatite","Astatite","Oxide","Oxide","Oxide","Sulfate","Sulfate","Sulfite","Disulfate","Disulfite","Dithiosulfate","Disulfite","Sulfite","Sulfate", "Sulfate","Selenate","Selenate","Selenite","Diselenopentoxide","Diselenoheptoxide"]
+            var ionNameY = ["Oxide","Oxide","Oxide","Sulfate","Sulfate","Sulfite","Disulfate","Disulfite","Dithiosulfate","Disulfite","Sulfite","Sulfate", "Sulfate","Selenate","Selenate","Selenite","Diselenopentoxide","Diselenoheptoxide"]
 
-            var ionNameZ = ["Bohrate","Ferride","Ferride","Ruthenite","Ruthenite","Ruthenite","Ruthenite","Hyporuthenite","Hyporuthenite","Hyporuthenite","Osmiate","Osmiate","Osmiate","Osmiate","Hypoosmiite","Hypoosmiite","Hypoosmiite","Hassate","Hypocobaltite","Cobaltate","Rhodide","Rhodide","Iridate","Hypoiridite","Nickelate","Nickelate","Hyponickelite","Palladate","Palladate","Platinide","Platinide","Cuprite","Hypocuprite","Argentate","Aurate","Aurate","Zincate","Cadmate","Hypomercurite","Mercurate","Aluminide","Gallate","Gallite","Indite","Indate","Thallate","Thallite","Germanite","Germanate","Stannate","Stannite","Plumbate","Plumbite","Bismuthate","Bismuthite","Polonate","Polonite","Monohydrate","Carbite","Nitrite","Phosphite","Oxite","Sulfite","Selenite","Fluorite","Chlorite","Bromite","Iodite","Astatite","Chlorite","Hypochlorite","Hypochlorite","Hypochlorite","Bromite","Hypobromite","Hypobromite","Hypobromite","Iodite","Hypoiodite","Hypoiodite","Hypoiodite","Astatite","Hypoastatite","Hypoastatite","Hypoastatite","Hypoxide","Dioxide","Trioxide","Sulfide","Sulfide","Sulfide","Disulfopentoxate","Disulfoheptoxate","Disulfotrioxide","Disulfohexoxide","Thionate","Sulfite","Sulfite","Selenide","Selenide","Selenide","Diperselenite","Diperselenate"]
+            var ionNameZ = ["Hypoxide","Dioxide","Trioxide","Sulfide","Sulfide","Sulfide","Disulfopentoxate","Disulfoheptoxate","Disulfotrioxide","Disulfohexoxide","Thionate","Sulfite","Sulfite","Selenide","Selenide","Selenide","Diperselenite","Diperselenate"]
 
-            var ionNameZZ = ["Perbohrate","Perferrite","Perferrate","Perruthenate","Perruthenate","Perruthenate","Perruthenate","Perruthenate","Perruthenate","Perruthenate","Perosmiate","Perosmiate","Perosmiate","Perosmiate","Perosmiate","Perosmiate","Perosmiate","Perhassate","Percobaltate","Percobaltate","Perrhodate","Hyporhodite","Periridate","Periridate","Pernickelate","Pernickelate","Pernickelate","Hypopalladite","Hypopalladite","Hypoplatinite","Hypoplatinite","Percuprate","Percuprate","Peragentate","Peraurate","Peraurate","Perzincate","Hypocadmite","Permercurate","Permercurate","Peraluminate","Pergallate","Hypogallite","Perindate","Hypoindie","Hypothallite","Perthallate","Hypogermanite","Pergermanate","Perstannate","Hypostannite","Hypoplumbite","Perplumbate","Hypobismuthite","Perbismuthate","Hypoplonite","Perpolonate","Perhydrate","Percarbate","Pernitrate","Perphosphate","Peroxide","Hyposulfite","Perselenate","Hypofluorite","Perchlorate","Hypobromite","Periodate","Hypoastatite","Perchlorate","Perchlorate","Perchlorate","Chlorate","Perbromate","Perbromate","Perbromate","Bromate","Periodate","Periodate","Periodate","Iodate","Perastatate","Perastatate","Perastatate","Astatate","Dioxide","Peroxide","Peroxide","Persulfate","Persultfate","Persulfate","Persulfite","Dipersulfate","Perthiosulfate","Disulfide","Persulfate","Hydrosulfate","Hydrosulfate","Perselenate","Perselenate","Perselenate","Perselenite","Perselenate"]
+            var ionNameZZ = ["Dioxide","Peroxide","Peroxide","Persulfate","Persultfate","Persulfate","Persulfite","Dipersulfate","Perthiosulfate","Disulfide","Persulfate","Hydrosulfate","Hydrosulfate","Perselenate","Perselenate","Perselenate","Perselenite","Perselenate"]
 
-            var explanation = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3]
+            
 
             
 
@@ -273,15 +279,15 @@
             $('#q10').on('click', function(){
               numQ=10;
               timer();
-           })
+           });
             $('#q25').on('click', function(){
               numQ=25;
               timer();
-           })
+           });
            $('#q50').on('click', function(){
               numQ=50;
               timer();
-           })
+           });
            $('#q100').on('click', function(){
               numQ=100;
               timer();
@@ -289,23 +295,23 @@
            $('#timer5').on('click', function(){
               time=5000;
               start();
-           })
+           });
            $('#timer8').on('click', function(){
               time=8000;
               start();
-           })
+           });
            $('#timer10').on('click', function(){
               time=10000;
               start();
-           })
+           });
            $('#timer15').on('click', function(){
               time=15000;
               start();
-           })
+           });
            $('#timerNone').on('click', function(){
               time=0;
               start();
-           })
+           });
 
 
 
@@ -863,17 +869,17 @@
 
         function getExplanation() {
 
-          var explanationList = ["This ion is a <span id='monoatomic' class='blue' style='cursor:help'>monoatomic</span> ion as indicated by having the symbol of only a single element with no subscript (" + useThisArray[i].ions + "), and a <span id='cation' class='blue' style='cursor:help'>cation</span> as indicated by its positive charge.</br></br>Because a cation will always be the first component of any <span id='binary' class='blue' title='A binary ionic compound is one that is composed of two components-a cation component composed of one or more particles of the cation, listed first in the formula, and an anion component composed of a number of particles of anion that brings the compound formula into electrical balance, listed second in the formula.'> binary ionic compound</span>, <span style='text-decoration:underline;font-weight:600'>the name of any monoatomic cation will always simply be the element name.</span></br></br>", 
+          var explanationList = ["This ion is a <span id='monoatomic' class='blue' style='cursor:help;'>monoatomic</span> ion as indicated by having the symbol of only a single element with no subscript (" + useThisArray[i].ions + "), and a <span id='cation' class='blue' style='cursor:help'>cation</span> as indicated by its positive charge.</br></br>Because a cation will always be the first component of any <span id='binary' class='blue' title='A binary ionic compound is one that is composed of two components-a cation component composed of one or more particles of the cation, listed first in the formula, and an anion component composed of a number of particles of anion that brings the compound formula into electrical balance, listed second in the formula.'> binary ionic compound</span>, <span style='text-decoration:underline;font-weight:600'>the name of any monoatomic cation will always simply be the element name.</span></br></br>", 
 
             "If the cation is from group IA, IIA, or is Aluminum in IIIA, as is the case with this ion, (" + useThisArray[i].ions + useThisArray[i].ionCharge + "), no Roman numerals indicating charge are necessary.",
 
             "However, if the ion is a transition metal or a post-transition metal, as is the case with this ion, (" + useThisArray[i].ions + useThisArray[i].ionCharge + "), as the ion may have one of multiple oxidation states (charges), it is desirable that a Roman numeral representing the oxidation state (charge) be included in the name-<span style='font-weight:600'>" + useThisArray[i].ionName + "</span>",
 
-            "This ion is a <span id='monoatomic' class='blue' title='A monoatomic ion is an ion that is composed of a single atom of a single element.' style='cursor:help'>monoatomic</span> ion as indicated by having the symbol of only a single element with no subscript (" + useThisArray[i].ions + "), and an <span id='anion' class='blue' title='An anion is an ion with a negative charge.' style='cursor:help'>anion</span> as indicated by its negative charge.</br></br>An anion will always be the second component of any <span id='binary' class='blue' title='A binary ionic compound is one that is composed of two components-a cation component composed of one or more particles of the cation, listed first in the formula, and an anion component composed of a number of particles of anion that brings the compound formula into electrical balance, listed second in the formula.' style='cursor:help'> binary ionic compound.</span></br></br>For all monoatomic anions the name is formed from the element name by dropping the last few letters of this name and adding the suffix <span style='font-weigh: 600'>-ide</span>.  In this case, <span style='font-weight: 600'>" + useThisArray[i].ionName + "</span></br></br>There are no specific rules for how many letters to drop from the element name before adding -ide.  It is mainly based on what sounds best phonetically-you will pick up these names quickly.",
+            "This ion is a <span id='monoatomic' class='blue' title='A monoatomic ion is an ion that is composed of a single atom of a single element.' style='cursor:help'>monoatomic</span> ion as indicated by having the symbol of only a single element with no subscript (" + useThisArray[i].ions + "), and an <span id='anion' class='blue' title='An anion is an ion with a negative charge.' style='cursor:help'>anion</span> as indicated by its negative charge.</br></br>An anion will always be the second component of any <span id='binary' class='blue' title='A binary ionic compound is one that is composed of two components-a cation component composed of one or more particles of the cation, listed first in the formula, and an anion component composed of a number of particles of anion that brings the compound formula into electrical balance, listed second in the formula.' style='cursor:help'> binary ionic compound.</span></br></br>For all monoatomic anions the name is formed from the element name by dropping the last few letters of this name and adding the suffix <span style='font-weigh: 600'>-ide</span>.  In this case, <span style='font-weight: 600'>" + useThisArray[i].ionName + "</span></br></br>There are no specific rules for how many letters to drop from the element name before adding -ide.  It is mainly based on what sounds best phonetically-you will pick up these names quickly.</br></br>  Because these ions only have a single oxidation state there is no need to further distinguish the ion names with Roman numerals as in the transition and post-transition metal cations.",
 
-            "This ion is a <span id='polyatomic' class='blue' title='' style='cursor:help'>polyatomic ion</span> as indicated by the fact that it is composed of more than one atom.  The atoms composing polyatomic ions are usually from different elements as in this case (" + useThisArray[i].ions + useThisArray[i].ionCharge + ") but may also be from the same element.</br></br>Remember that the atoms composing these ions are covalently bonded and the whole structure contains the charge of the ion.  The whole structure is viewed as a unit-the individual atoms of the ion are not considered seperately."
+            "This ion is a <span id='polyatomic' class='blue' title='' style='cursor:help'>polyatomic ion</span> as indicated by the fact that it is composed of more than one atom.  The atoms composing polyatomic ions are usually from different elements as in this case (" + useThisArray[i].ions + useThisArray[i].ionCharge + ") but may also be from the same element.</br></br>Remember that the atoms composing these ions are covalently bonded and the whole structure contains the charge of the ion.  The whole structure is viewed as a unit-the individual atoms of the ion are not considered seperately.",
 
-
+            "<span class='red'>NOTE</span>: The older 'Latin' system name for this ion is " + useThisArray[i].latin + ".  See the <span id='latin' class='blue' style='cursor:help'>Latin System</span> note for further details.</br></br>"
              
 
              ]
@@ -899,6 +905,10 @@
           } else if (explanationIndex==3){
 
             explanationActual=explanationList[4]
+
+          }else if (explanationIndex==4){
+
+            explanationActual=explanationList[5] + explanationList[0] + explanationList[2]
 
           } else {
 
@@ -960,7 +970,14 @@
               });
             $('#cation').on('click', function() {
               accessoryWindow('cation.html','',500,500)
-            })
+            });
+            $('#latin').on('click', function() {
+              accessoryWindow('latin.html','',1000,800)
+            });
+            $('#anion').on('click', function() {
+              accessoryWindow('anion.html','',500,500)
+            });
+
 
           }
 
@@ -1115,7 +1132,7 @@
       <button class="button" type="button" id="q50">50 Questions</button></br>
       <button class="button" type="button" id="q100">100 Questions</button></br>
 
-    </span>
+  </span>
 
 
 
@@ -1129,12 +1146,9 @@
       <button class="button" type="button" id="timer8">8 seconds</button></br>
       <button class="button" type="button" id="timer10">10 seconds</button></br>
       <button class="button" type="button" id="timer15">15 seconds</button></br>
-      <button class="button" type="button" id="timerNone">No time limit</button></br>
-     
+      <button class="button" type="button" id="timerNone">No time limit</button></br>  
 
     </span>
-
-
 
   </span>
 
